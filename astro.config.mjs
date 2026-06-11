@@ -10,7 +10,7 @@ export default defineConfig({
       starlight({
           title: 'Yid Craft',
           tableOfContents: true,
-          favicon: 'assets/favicon.png',
+          favicon: '/assets/favicon.png',
           customCss: [
               // Relative path to your custom CSS file
               './src/styles/global.css',
