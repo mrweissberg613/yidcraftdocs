@@ -2,15 +2,15 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-import vercel from '@astrojs/vercel';
+
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
       starlight({
-          title: 'Yid Craft Wiki',
+          title: 'Yid Craft',
           tableOfContents: true,
-          favicon: './src/assets/favicon.png',
+          favicon: 'assets/favicon.png',
           customCss: [
               // Relative path to your custom CSS file
               './src/styles/global.css',
@@ -51,5 +51,5 @@ export default defineConfig({
       }),
 	],
 
-  adapter: vercel(),
+ 
 });
