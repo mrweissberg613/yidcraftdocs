@@ -11,6 +11,9 @@ export default defineConfig({
           title: 'Yid Craft',
           tableOfContents: true,
           favicon: '/assets/favicon.png',
+		  editLink: {
+    			baseUrl: 'https://github.com/mrweissberg613/yidcraftdocs/edit/main/',
+  			},
           customCss: [
               // Relative path to your custom CSS file
               './src/styles/global.css',
