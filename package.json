@@ -13,6 +13,8 @@
     "@astrojs/starlight": "^0.38.2",
     "@astrojs/vercel": "^10.0.8",
     "astro": "^6.0.1",
-    "sharp": "^0.34.2"
+    "sharp": "^0.34.2",
+    "starlight-announcement": "^1.1.0",
+    "starlight-scroll-to-top": "^1.0.1"
   }
 }

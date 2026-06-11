@@ -1,15 +1,35 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-
-
+import starlightAnnouncement from 'starlight-announcement'
+import starlightScrollToTop from 'starlight-scroll-to-top';
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
       starlight({
           title: 'Yid Craft',
-          tableOfContents: true,
+		  tableOfContents: true,
+		  expressiveCode: {
+    			styleOverrides: { borderRadius: '0.5rem' },
+  			},
+
+		   plugins: [
+				starlightScrollToTop(),
+        		starlightAnnouncement({
+					displayMode: 'stack',
+          			rotateInterval: 5000,
+          			announcements: [
+            	{
+              		id: 'notreleased',
+              		content: 'Server not out yet',
+              		variant: 'danger',
+					dismissible: false,
+
+            },
+          ],
+        }),
+      ],
           favicon: '/assets/favicon.png',
 		  editLink: {
     			baseUrl: 'https://github.com/mrweissberg613/yidcraftdocs/edit/main/',
