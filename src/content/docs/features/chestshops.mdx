@@ -1,0 +1,74 @@
+---
+title: Chest Shops
+description: Learn how to create and use chest shops.
+---
+
+# Creating a Player Shop
+
+Chest Shops allow players to buy and sell items directly from a chest.
+
+## Step 1: Place a Chest
+
+Place a chest where you want your shop to be located.
+
+## Step 2: Place a Sign
+
+Place a sign exactly **one block away** from the chest (for example, directly above it).
+
+Write the following format on the sign:
+
+![Chest Shop Format](/assets/chestshopformat.png)
+
+### Sign Format
+
+**Line 1**
+- Leave this line blank.
+- The plugin will automatically fill it with your username.
+- Players with the `ChestShop.admin` permission can create shops under other players' names.
+
+**Line 2**
+- Enter the quantity of items being bought or sold.
+
+**Line 3**
+- Enter the buy and/or sell price.
+- Use:
+  - `B` = Price players pay to **buy** items.
+  - `S` = Price players receive when they **sell** items.
+- Separate buy and sell prices with a colon (`:`).
+
+Examples:
+
+```text
+B 5:5 S
+B 5
+S free
+B 10:5 S
+```
+
+**Line 4**
+- Enter the item name or ID.
+- You can also place a `?` on this line and the plugin will automatically detect the item from the chest.
+- Alternatively, click the sign while holding the desired item.
+- Use `/iteminfo` to view the correct item name for the item you're holding.
+
+## Example Shop
+
+![Example Chest Shop](/assets/chestsshopexample.png)
+
+### What This Shop Does
+
+In the example above:
+
+- Players can **buy 64 diamonds** for **$10**.
+- Players can **sell 64 diamonds** back for **$5**.
+- The shop owner is **Phoenix616**.
+
+## Tips
+
+:::tip
+Make sure the chest contains enough stock before opening your shop to other players.
+:::
+
+:::note
+If a shop is out of stock, players will not be able to purchase items from it.
+:::
