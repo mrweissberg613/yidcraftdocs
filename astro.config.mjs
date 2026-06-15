@@ -3,13 +3,15 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightAnnouncement from 'starlight-announcement'
 import starlightScrollToTop from 'starlight-scroll-to-top';
-
 // https://astro.build/config
 export default defineConfig({
   integrations: [
       starlight({
           title: 'Yid Craft',
 		  tableOfContents: true,
+           components: {
+                Head: './src/components/CountdownScript.astro',
+            },
 		  expressiveCode: {
     			styleOverrides: { borderRadius: '0.5rem' },
   			},
@@ -21,12 +23,11 @@ export default defineConfig({
           			rotateInterval: 5000,
           			announcements: [
             	{
-              		id: 'notreleased',
-              		content: 'Server not out yet',
-              		variant: 'danger',
+              		id: 'released',
+              		content: 'Server launches in <span id="countdown"></span>',
+              		variant: 'tip',
 					dismissible: false,
-
-            },
+                },
           ],
         }),
       ],
