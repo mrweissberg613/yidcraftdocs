@@ -32,9 +32,6 @@ export default defineConfig({
         }),
       ],
           favicon: '/assets/favicon.png',
-		  editLink: {
-    			baseUrl: 'https://github.com/mrweissberg613/yidcraftdocs/edit/main/',
-  			},
           customCss: [
               // Relative path to your custom CSS file
               './src/styles/global.css',
@@ -45,7 +42,7 @@ export default defineConfig({
               alt: 'Yid Craft Wiki'
           },
           social: [
-              {icon: 'discord', label: 'Discord', href: 'https://discord.gg/xM4PMY2s9X'}
+              {icon: 'discord', label: 'Discord', href: 'https://discord.gg/yyPXT92RAN'}
           ],
           lastUpdated: true,
           sidebar: [
@@ -70,6 +67,10 @@ export default defineConfig({
                       { label: 'Custom Foods', slug: 'features/customfoods' }
 
                   ],
+              },
+              {
+                  label: 'Community Pages',
+                  autogenerate: { directory: 'community' },
               },
           ],
       }),

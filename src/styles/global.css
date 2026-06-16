@@ -1,3 +1,288 @@
-html {
-  scroll-behavior: smooth;
+.yc-wiki-account {
+  margin-left: 0.75rem;
+  font-size: 0.82rem;
+}
+
+.yc-wiki-login,
+.yc-wiki-menu summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2rem;
+  padding: 0.3rem 0.55rem;
+  color: var(--sl-color-white);
+  background: color-mix(in srgb, var(--sl-color-accent-high), transparent 82%);
+  border: 1px solid color-mix(in srgb, var(--sl-color-accent-high), transparent 48%);
+  border-radius: 0.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  text-decoration: none;
+}
+
+.yc-wiki-login {
+  font: inherit;
+}
+
+.yc-wiki-menu {
+  position: relative;
+}
+
+.yc-wiki-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.yc-wiki-menu img,
+.yc-wiki-avatar-fallback {
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+}
+
+.yc-wiki-menu img {
+  object-fit: cover;
+}
+
+.yc-wiki-avatar-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sl-color-accent-high);
+  color: var(--sl-color-black);
+  font-weight: 900;
+}
+
+.yc-wiki-popover {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  z-index: 30;
+  width: 15rem;
+  padding: 0.8rem;
+  background: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.35);
+}
+
+.yc-wiki-popover strong {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--sl-color-white);
+}
+
+.yc-wiki-popover p {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin: 0.35rem 0;
+  color: var(--sl-color-gray-2);
+}
+
+.yc-wiki-popover .yc-wiki-note {
+  display: block;
+  padding-top: 0.25rem;
+  color: var(--sl-color-gray-2);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.yc-wiki-popover span {
+  color: var(--sl-color-white);
+  font-weight: 800;
+}
+
+.yc-wiki-popover a,
+.yc-wiki-popover button {
+  display: flex;
+  width: 100%;
+  min-height: 2rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+  color: var(--sl-color-white);
+  background: color-mix(in srgb, var(--sl-color-accent-high), transparent 85%);
+  border: 1px solid color-mix(in srgb, var(--sl-color-accent-high), transparent 55%);
+  border-radius: 0.35rem;
+  font: inherit;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.yc-wiki-popover button:disabled,
+.yc-wiki-page-tools button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.yc-wiki-page-tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: min(100% - 2rem, 72rem);
+  margin: 1rem auto 0;
+  padding: 0.7rem 0.8rem;
+  color: var(--sl-color-white);
+  background: color-mix(in srgb, var(--sl-color-gray-6), transparent 5%);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+}
+
+.yc-wiki-page-tools div {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.yc-wiki-page-tools .yc-wiki-page-actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.yc-wiki-page-tools strong {
+  font-size: 0.88rem;
+}
+
+.yc-wiki-page-tools span {
+  color: var(--sl-color-gray-2);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.yc-wiki-page-tools button {
+  flex: 0 0 auto;
+  min-height: 2rem;
+  padding: 0 0.75rem;
+  color: var(--sl-color-white);
+  background: color-mix(in srgb, var(--sl-color-accent-high), transparent 82%);
+  border: 1px solid color-mix(in srgb, var(--sl-color-accent-high), transparent 45%);
+  border-radius: 0.35rem;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.yc-wiki-editor {
+  width: min(58rem, calc(100vw - 2rem));
+  padding: 0;
+  color: var(--sl-color-white);
+  background: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+}
+
+.yc-wiki-editor::backdrop {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.yc-wiki-editor-panel {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.yc-wiki-editor-head,
+.yc-wiki-editor-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.yc-wiki-editor-head span,
+.yc-wiki-editor-status {
+  display: block;
+  color: var(--sl-color-gray-2);
+  font-size: 0.82rem;
+}
+
+.yc-wiki-editor-help {
+  margin: 0;
+  color: var(--sl-color-gray-2);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.yc-wiki-editor-status a {
+  color: var(--sl-color-accent-high);
+  font-weight: 800;
+}
+
+.yc-wiki-editor-path {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--sl-color-gray-2);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.yc-wiki-editor-path input {
+  width: 100%;
+  min-height: 2.25rem;
+  padding: 0 0.65rem;
+  color: var(--sl-color-white);
+  background: var(--sl-color-black);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.35rem;
+  font: 0.9rem/1.4 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+}
+
+.yc-wiki-editor-path input:disabled {
+  opacity: 0.72;
+}
+
+.yc-wiki-editor textarea {
+  width: 100%;
+  min-height: 55vh;
+  padding: 0.75rem;
+  color: var(--sl-color-white);
+  background: var(--sl-color-black);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.35rem;
+  font: 0.92rem/1.5 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  resize: vertical;
+}
+
+.yc-wiki-editor-close,
+.yc-wiki-editor-save {
+  min-height: 2.2rem;
+  padding: 0 0.75rem;
+  color: var(--sl-color-white);
+  background: color-mix(in srgb, var(--sl-color-accent-high), transparent 82%);
+  border: 1px solid color-mix(in srgb, var(--sl-color-accent-high), transparent 45%);
+  border-radius: 0.35rem;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+@media (max-width: 50rem) {
+  .yc-wiki-page-tools {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .yc-wiki-page-tools button {
+    width: 100%;
+  }
+
+  .yc-wiki-page-tools .yc-wiki-page-actions {
+    flex-direction: column;
+  }
+
+  .yc-wiki-account {
+    margin-left: 0.4rem;
+  }
+
+  .yc-wiki-menu summary span {
+    max-width: 5.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
