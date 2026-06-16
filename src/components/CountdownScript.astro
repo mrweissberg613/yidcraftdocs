@@ -1,1 +1,353 @@
 <script is:inline src="/countdown.js"></script>
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('a[href^="/wiki/"]').forEach((link) => {
+      const href = link.getAttribute("href");
+      if (!href || href.endsWith(".html") || href.includes("#") || href.includes("?")) return;
+      link.setAttribute("href", href.endsWith("/") ? `${href}index.html` : `${href}/index.html`);
+    });
+  });
+</script>
+<script is:inline>
+  (() => {
+    const authUrl = (path) => path;
+
+    const escapeHtml = (value) =>
+      String(value ?? "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]);
+
+    const sourcePathForCurrentPage = () => {
+      let pagePath = window.location.pathname
+        .replace(/^\/wiki\/?/, "")
+        .replace(/\/index\.html$/, "")
+        .replace(/^index\.html$/, "index")
+        .replace(/\.html$/, "")
+        .replace(/\/$/, "");
+
+      if (!pagePath) pagePath = "index";
+      if (pagePath === "community") pagePath = "community/index";
+      return `src/content/docs/${pagePath}.mdx`;
+    };
+
+    const sourcePathFromInput = (value) => {
+      let pagePath = String(value || "")
+        .trim()
+        .replace(/\\/g, "/")
+        .replace(/^\/+/, "")
+        .replace(/^wiki\/?/, "")
+        .replace(/^Wiki\/src\/content\/docs\//, "")
+        .replace(/^src\/content\/docs\//, "")
+        .replace(/\/index\.html$/, "")
+        .replace(/^index\.html$/, "index")
+        .replace(/\.html$/, "")
+        .replace(/\.mdx$/, "")
+        .replace(/\/$/, "");
+
+      if (!pagePath) pagePath = "community/new-page";
+      return `src/content/docs/${pagePath}.mdx`;
+    };
+
+    const sectionForSourcePath = (sourcePath) => {
+      if (sourcePath.includes("/guides/")) return "guides";
+      if (sourcePath.includes("/features/")) return "features";
+      return "home";
+    };
+
+    const canEditCurrentPage = (account) => {
+      const wiki = account.permissions?.wiki;
+      if (!wiki) return false;
+      return Boolean(wiki.canEditAll || wiki.sections?.[sectionForSourcePath(sourcePathForCurrentPage())]);
+    };
+
+    const openLoginPopup = () => {
+      const width = 520;
+      const height = 720;
+      const left = window.screenX + (window.outerWidth - width) / 2;
+      const top = window.screenY + (window.outerHeight - height) / 2;
+      const popup = window.open(
+        authUrl("/api/auth/discord/login?popup=1"),
+        "yidcraft-discord-login",
+        `popup=yes,width=${width},height=${height},left=${left},top=${top}`
+      );
+
+      if (!popup) {
+        window.location.href = authUrl("/api/auth/discord/login");
+        return;
+      }
+
+      const cleanup = () => {
+        window.removeEventListener("message", onMessage);
+        window.clearInterval(timer);
+      };
+      const finish = () => {
+        cleanup();
+        window.location.reload();
+      };
+      const onMessage = (event) => {
+        if (event.data?.type !== "yidcraft:discord-login") return;
+        popup.close();
+        finish();
+      };
+      const timer = window.setInterval(() => {
+        if (popup.closed) finish();
+      }, 800);
+
+      window.addEventListener("message", onMessage);
+    };
+
+    const createPageTemplate = (sourcePath) => {
+      const title = sourcePath
+        .replace(/^src\/content\/docs\//, "")
+        .replace(/\.mdx$/, "")
+        .split("/")
+        .filter(Boolean)
+        .pop()
+        ?.replace(/[-_]+/g, " ")
+        .replace(/\b\w/g, (letter) => letter.toUpperCase()) || "New Page";
+
+      return `---
+title: ${title}
+description: Add a short page description.
+---
+
+# ${title}
+
+Write the new wiki page here.
+`;
+    };
+
+    const openWikiEditor = async ({ create = false } = {}) => {
+      const initialPath = create ? "src/content/docs/community/new-page.mdx" : sourcePathForCurrentPage();
+      let dialog = document.querySelector(".yc-wiki-editor");
+
+      if (!dialog) {
+        dialog = document.createElement("dialog");
+        dialog.className = "yc-wiki-editor";
+        dialog.innerHTML = `
+          <form method="dialog" class="yc-wiki-editor-panel">
+            <div class="yc-wiki-editor-head">
+              <div>
+                <strong>Edit wiki page</strong>
+                <span></span>
+              </div>
+              <button class="yc-wiki-editor-close" type="submit">Close</button>
+            </div>
+            <p class="yc-wiki-editor-help">Edits are submitted to GitHub as a pull request. The live wiki updates after an admin merges the PR and the site rebuilds.</p>
+            <label class="yc-wiki-editor-path">
+              <span>Page path</span>
+              <input type="text" autocomplete="off">
+            </label>
+            <textarea spellcheck="false"></textarea>
+            <p class="yc-wiki-editor-status"></p>
+            <div class="yc-wiki-editor-actions">
+              <button class="yc-wiki-editor-save" type="button">Save changes</button>
+            </div>
+          </form>
+        `;
+        document.body.appendChild(dialog);
+      }
+
+      const heading = dialog.querySelector(".yc-wiki-editor-head strong");
+      const title = dialog.querySelector(".yc-wiki-editor-head span");
+      const pathInput = dialog.querySelector(".yc-wiki-editor-path input");
+      const textarea = dialog.querySelector("textarea");
+      const status = dialog.querySelector(".yc-wiki-editor-status");
+      const saveButton = dialog.querySelector(".yc-wiki-editor-save");
+      const getSourcePath = () => sourcePathFromInput(pathInput.value);
+
+      heading.textContent = create ? "Create wiki page" : "Edit wiki page";
+      pathInput.disabled = !create;
+      pathInput.value = initialPath;
+      title.textContent = initialPath;
+      textarea.value = create ? createPageTemplate(initialPath) : "";
+      status.textContent = create ? "Choose a page path, then write the new MDX page." : "Loading page source...";
+      saveButton.disabled = !create;
+      saveButton.onclick = null;
+      dialog.showModal();
+
+      pathInput.oninput = () => {
+        const nextPath = getSourcePath();
+        title.textContent = nextPath;
+        if (create) textarea.value = createPageTemplate(nextPath);
+      };
+
+      if (!create) {
+        try {
+          const response = await fetch(`/api/wiki/page?path=${encodeURIComponent(initialPath)}`, {
+            credentials: "include"
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || "Could not load page.");
+          textarea.value = data.content;
+          saveButton.disabled = false;
+          status.textContent = data.warning
+            ? `Loaded from ${data.source}. ${data.warning}`
+            : `Loaded from ${data.source}.`;
+        } catch (error) {
+          status.textContent = error.message;
+          return;
+        }
+      }
+
+      saveButton.onclick = async () => {
+        const sourcePath = getSourcePath();
+        status.textContent = "Saving...";
+        saveButton.disabled = true;
+        try {
+          const response = await fetch(`/api/wiki/page?path=${encodeURIComponent(sourcePath)}`, {
+            method: "POST",
+            credentials: "include",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ content: textarea.value, create })
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || "Could not save page.");
+          if (data.pullRequestUrl) {
+            status.innerHTML = `${create ? "Created" : "Saved"} as a pull request: <a href="${escapeHtml(data.pullRequestUrl)}" target="_blank" rel="noreferrer">open PR #${data.pullRequestNumber}</a>`;
+          } else {
+            status.textContent = `${create ? "Created" : "Saved"} to ${data.savedTo}${data.githubPath ? ` at ${data.githubPath}` : ""}. Rebuild/deploy may be needed before everyone sees it.`;
+          }
+        } catch (error) {
+          status.textContent = error.message;
+        } finally {
+          saveButton.disabled = false;
+        }
+      };
+    };
+
+    const renderPageTools = (account) => {
+      const main = document.querySelector("main");
+      if (!main || main.querySelector(".yc-wiki-page-tools")) return;
+
+      const canEditPage = account.authenticated && canEditCurrentPage(account);
+      const accessNote = !account.authenticated
+        ? "Login with Discord to edit the wiki."
+        : canEditPage
+          ? "Editor role verified."
+          : account.discord?.roleSyncError ||
+            (!account.discord?.guildConfigured
+              ? "Role sync needs the Discord bot token."
+              : "This account does not have the wiki editor role.");
+
+      const tools = document.createElement("div");
+      tools.className = "yc-wiki-page-tools";
+      tools.innerHTML = `
+        <div>
+          <strong>${canEditPage ? "Wiki editor" : "Wiki read only"}</strong>
+          <span>${escapeHtml(accessNote)}</span>
+        </div>
+        <div class="yc-wiki-page-actions">
+          ${
+            canEditPage
+              ? '<button class="yc-wiki-page-edit" type="button">Edit page</button><button class="yc-wiki-page-create" type="button">Create page</button>'
+              : account.authenticated
+                ? '<button class="yc-wiki-page-edit" type="button" disabled>Edit page locked</button>'
+                : '<button class="yc-wiki-page-login" type="button">Connect Discord</button>'
+          }
+        </div>
+      `;
+
+      tools.querySelector(".yc-wiki-page-edit:not([disabled])")?.addEventListener("click", () => openWikiEditor());
+      tools.querySelector(".yc-wiki-page-create")?.addEventListener("click", () => openWikiEditor({ create: true }));
+      tools.querySelector(".yc-wiki-page-login")?.addEventListener("click", openLoginPopup);
+      main.prepend(tools);
+    };
+
+    const renderWikiAccount = (account) => {
+      const target = document.querySelector(".title-wrapper");
+      if (!target || target.querySelector(".yc-wiki-account")) return;
+
+      const element = document.createElement("div");
+      element.className = "yc-wiki-account";
+
+      if (!account.authenticated || !account.user) {
+        element.innerHTML = `
+          <details class="yc-wiki-menu">
+            <summary>
+              <span class="yc-wiki-avatar-fallback">G</span>
+              <span>Guest</span>
+            </summary>
+            <div class="yc-wiki-popover">
+              <strong>Guest</strong>
+              <p>Wiki access <span>Read only</span></p>
+              <p>Contributions <span>Login first</span></p>
+              <button class="yc-wiki-login" type="button">Connect Discord</button>
+            </div>
+          </details>
+        `;
+        element.querySelector(".yc-wiki-login")?.addEventListener("click", openLoginPopup);
+        target.appendChild(element);
+        return;
+      }
+
+      const user = account.user;
+      const name = escapeHtml(user.globalName || user.username || "Discord");
+      const avatar = user.avatar
+        ? `<img src="${escapeHtml(user.avatar)}" alt="">`
+        : `<span class="yc-wiki-avatar-fallback">D</span>`;
+      const wikiEdits = account.contributions?.wikiEdits ?? 0;
+      const discordActivity = account.contributions?.discordActivity ?? 0;
+      const minecraftSync = account.contributions?.minecraftStatsSynced ? "Active" : "Waiting";
+      const canEditPage = canEditCurrentPage(account);
+      const wikiAccess = canEditPage ? "Can edit" : "Read only";
+      const accessNote = canEditPage
+        ? "Editor role verified."
+        : account.discord?.roleSyncError ||
+          (!account.discord?.guildConfigured
+            ? "Role sync needs the Discord bot token."
+            : "This account does not have the wiki editor role.");
+
+      element.innerHTML = `
+        <details class="yc-wiki-menu">
+          <summary>
+            ${avatar}
+            <span>${name}</span>
+          </summary>
+          <div class="yc-wiki-popover">
+            <strong>${name}</strong>
+            <p>Wiki access <span>${wikiAccess}</span></p>
+            <p class="yc-wiki-note">${escapeHtml(accessNote)}</p>
+            <p>Wiki edits <span>${wikiEdits}</span></p>
+            <p>Discord activity <span>${discordActivity}</span></p>
+            <p>Minecraft sync <span>${minecraftSync}</span></p>
+            ${
+              canEditPage
+                ? '<button class="yc-wiki-edit" type="button">Edit page</button>'
+                : '<button class="yc-wiki-edit" type="button" disabled>Edit page locked</button>'
+            }
+            ${canEditPage ? '<button class="yc-wiki-create" type="button">Create page</button>' : ""}
+            <a href="/#login">Account panel</a>
+            <button class="yc-wiki-logout" type="button">Logout</button>
+          </div>
+        </details>
+      `;
+
+      element.querySelector(".yc-wiki-edit:not([disabled])")?.addEventListener("click", () => openWikiEditor());
+      element.querySelector(".yc-wiki-create")?.addEventListener("click", () => openWikiEditor({ create: true }));
+      element.querySelector(".yc-wiki-logout")?.addEventListener("click", async () => {
+        await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
+        window.location.reload();
+      });
+
+      target.appendChild(element);
+    };
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+        const response = await fetch(authUrl("/api/auth/me"), { credentials: "include" });
+        const account = await response.json();
+        renderWikiAccount(account);
+        renderPageTools(account);
+      } catch {
+        const account = { authenticated: false };
+        renderWikiAccount(account);
+        renderPageTools(account);
+      }
+    });
+  })();
+</script>
