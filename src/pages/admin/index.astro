@@ -1,0 +1,283 @@
+---
+import "../../styles/admin.css";
+
+const title = "YidCraft Wiki Admin";
+---
+
+<html>
+
+<head>
+
+	<title>{title}</title>
+
+</head>
+
+
+<body>
+
+
+<div class="admin-container">
+
+
+	<div class="card">
+
+
+		<h1>
+			YidCraft Wiki Admin
+		</h1>
+
+
+		<p>
+			Login to manage wiki pages.
+		</p>
+
+
+
+
+		<form id="loginForm">
+
+
+			<label>
+
+				Username
+
+				<input
+					id="username"
+					type="text"
+					required
+				>
+
+			</label>
+
+
+
+			<br><br>
+
+
+
+			<label>
+
+				Password
+
+				<input
+					id="password"
+					type="password"
+					required
+				>
+
+			</label>
+
+
+
+			<br>
+
+
+
+			<label>
+
+				<input
+					type="checkbox"
+					id="showPassword"
+				>
+
+				Show password
+
+			</label>
+
+
+
+			<br><br>
+
+
+
+			<button type="submit">
+
+				Login
+
+			</button>
+
+
+
+			<p id="error"></p>
+
+
+		</form>
+
+
+	</div>
+
+
+</div>
+
+
+
+
+
+<script>
+
+const form =
+	document.getElementById("loginForm");
+
+
+const error =
+	document.getElementById("error");
+
+
+
+form?.addEventListener(
+	"submit",
+	async (event)=>{
+
+
+		event.preventDefault();
+
+
+
+
+		const usernameInput =
+			document.getElementById("username");
+
+
+
+		const passwordInput =
+			document.getElementById("password");
+
+
+
+
+
+		if (
+
+			!(usernameInput instanceof HTMLInputElement) ||
+
+			!(passwordInput instanceof HTMLInputElement)
+
+		) {
+
+			return;
+
+		}
+
+
+
+
+
+		const username =
+			usernameInput.value;
+
+
+
+		const password =
+			passwordInput.value;
+
+
+
+		const response =
+			await fetch(
+				"/api/login",
+				{
+
+					method:"POST",
+
+					headers:{
+
+						"Content-Type":
+						"application/json"
+
+					},
+
+
+					body:JSON.stringify({
+
+						username,
+
+						password
+
+					})
+
+				}
+
+			);
+
+
+
+
+
+
+		if(response.ok){
+
+
+			window.location.href =
+				"/admin/dashboard";
+
+
+		}
+
+		else {
+
+
+			if(error){
+
+				error.textContent =
+					"Invalid username or password";
+
+			}
+
+
+		}
+
+
+	}
+
+);
+
+
+
+
+
+
+
+const passwordInput =
+	document.getElementById("password");
+
+
+const showPassword =
+	document.getElementById("showPassword");
+
+
+
+
+showPassword?.addEventListener(
+
+	"change",
+
+	()=>{
+
+
+		if (
+
+			passwordInput instanceof HTMLInputElement &&
+
+			showPassword instanceof HTMLInputElement
+
+		) {
+
+
+			passwordInput.type =
+				showPassword.checked
+				? "text"
+				: "password";
+
+
+		}
+
+
+	}
+
+);
+
+
+</script>
+
+
+</html>

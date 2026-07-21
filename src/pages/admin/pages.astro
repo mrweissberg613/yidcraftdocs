@@ -1,0 +1,223 @@
+---
+import "../../styles/admin.css";
+import { isAuthenticated } from "../../lib/auth";
+
+import fs from "node:fs";
+import path from "node:path";
+
+
+if (!isAuthenticated(Astro.cookies)) {
+
+	return Astro.redirect("/admin");
+
+}
+
+
+
+const docsPath = path.join(
+
+	process.cwd(),
+
+	"src/content/docs"
+
+);
+
+
+
+
+
+function getPages(
+	dir: string,
+	base = ""
+): string[] {
+
+
+	if (!fs.existsSync(dir)) {
+
+		return [];
+
+	}
+
+
+
+	const files =
+		fs.readdirSync(dir);
+
+
+
+	let pages: string[] = [];
+
+
+
+
+
+	for (const file of files) {
+
+
+		const full =
+			path.join(dir, file);
+
+
+
+
+		if (
+			fs.statSync(full).isDirectory()
+		) {
+
+
+			pages.push(
+				...getPages(
+					full,
+					`${base}${file}/`
+				)
+			);
+
+
+		}
+
+
+		else if (
+			file.endsWith(".mdx")
+		) {
+
+
+			pages.push(
+
+				`${base}${file.replace(".mdx","")}`
+
+			);
+
+
+		}
+
+
+	}
+
+
+
+	return pages;
+
+}
+
+
+
+
+
+const pages =
+	getPages(docsPath)
+	.sort();
+
+---
+
+<html>
+
+
+<head>
+
+	<title>
+		Wiki Pages - YidCraft Admin
+	</title>
+
+</head>
+
+
+<body>
+
+
+<div class="admin-container">
+
+
+<div class="card">
+
+
+<h1>
+	Wiki Pages
+</h1>
+
+
+<p>
+	Select a page to edit.
+</p>
+
+
+<br>
+
+
+
+
+<div class="page-list">
+
+
+{
+
+pages.length === 0 ? (
+
+	<p>
+		No pages found.
+	</p>
+
+) : (
+
+
+	pages.map(page => (
+
+		<div class="page-card">
+
+
+			<span>
+
+				📄 {page}
+
+			</span>
+
+
+
+			<a
+
+				class="button"
+
+				href={`/admin/edit/${page}`}
+
+			>
+
+				Edit
+
+			</a>
+
+
+		</div>
+
+	))
+
+
+)
+
+}
+
+
+</div>
+
+
+
+<br>
+
+
+
+<a class="button" href="/admin/dashboard">
+
+	← Back to Dashboard
+
+</a>
+
+so 
+
+</div>
+
+
+</div>
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,120 @@
+---
+import "../../../styles/admin.css";
+import { isAuthenticated } from "../../../lib/auth";
+import MarkdownEditor from "../../../components/MarkdownEditor.jsx";
+
+import fs from "node:fs";
+import path from "node:path";
+
+
+if (!isAuthenticated(Astro.cookies)) {
+
+	return Astro.redirect("/admin");
+
+}
+
+
+
+const slugParam = Astro.params.slug;
+
+
+if (!slugParam) {
+
+	return Astro.redirect("/admin/pages");
+
+}
+
+
+
+const slug = Array.isArray(slugParam)
+	? slugParam.join("/")
+	: slugParam;
+
+
+
+const filePath = path.join(
+
+	process.cwd(),
+
+	"src/content/docs",
+
+	`${slug}.mdx`
+
+);
+
+
+
+let content = "";
+
+
+
+if (fs.existsSync(filePath)) {
+
+	content = fs.readFileSync(
+		filePath,
+		"utf8"
+	);
+
+}
+
+
+
+const pageName =
+	slug.split("/").pop();
+
+---
+
+<html>
+
+<head>
+
+	<title>
+		Edit {pageName} - YidCraft Wiki
+	</title>
+
+</head>
+
+
+<body>
+
+
+<div class="admin-container">
+
+
+	<div class="card">
+
+
+		<h1>
+			Edit: {pageName}
+		</h1>
+
+
+		<p>
+			Path:
+			<code>
+				{slug}.mdx
+			</code>
+		</p>
+
+
+
+		<MarkdownEditor
+
+			client:load
+
+			initialContent={content}
+
+			filePath={slug}
+
+		/>
+
+
+	</div>
+
+
+</div>
+
+
+</body>
+
+</html>

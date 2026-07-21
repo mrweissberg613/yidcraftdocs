@@ -1,3 +1,11 @@
 html {
   scroll-behavior: smooth;
 }
+.full-builder {
+	height: calc(100vh - 70px);
+	overflow:hidden;
+}
+
+.builder-active .editor-toolbar {
+	display:none;
+}

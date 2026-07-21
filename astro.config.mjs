@@ -1,27 +1,45 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import react from '@astrojs/react';
 
-// https://astro.build/config
 export default defineConfig({
+	output: 'server',
+
+	vite: {
+		ssr: {
+			
+		}
+	},
+
 	integrations: [
+		react(),
+
 		starlight({
 			title: 'Yid Craft Wiki',
 			tableOfContents: true,
 			favicon: './src/assets/favicon.png',
+
 			customCss: [
-        		// Relative path to your custom CSS file
-        		'./src/styles/global.css',
-      		],
+				'./src/styles/global.css',
+			],
+
 			logo: {
 				src: './src/assets/yidcraftlogo.png',
 				replacesTitle: true,
 				alt: 'Yid Craft Wiki'
 			},
+
 			social: [
-				{icon: 'discord', label: 'Discord', href: 'https://discord.gg/xM4PMY2s9X'}
+				{
+					icon: 'discord',
+					label: 'Discord',
+					href: 'https://discord.gg/xM4PMY2s9X'
+				}
 			],
+
 			lastUpdated: true,
+
 			sidebar: [
 				{
 					label: 'Getting Started',
@@ -42,9 +60,9 @@ export default defineConfig({
 						{ label: 'Chest Shops', slug: 'features/chestshops' },
 						{ label: 'Kosher System', slug: 'features/koshersystem' },
 						{ label: 'Custom Foods', slug: 'features/customfoods' }
-
 					],
 				},
 			],
 		}),
-	],});
+	],
+});

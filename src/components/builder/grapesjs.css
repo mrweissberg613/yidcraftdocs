@@ -1,0 +1,173 @@
+.builder-wrapper {
+
+	position:fixed;
+
+	top:0;
+
+	left:0;
+
+	width:100vw;
+
+	height:100vh;
+
+	display:flex;
+
+	background:#111827;
+
+	overflow:hidden;
+
+}
+
+
+
+.builder-content {
+
+	display:flex;
+
+	width:100%;
+
+	height:100%;
+
+}
+
+
+
+/* LEFT BLOCK SIDEBAR */
+
+#blocks {
+
+	width:260px;
+
+	flex-shrink:0;
+
+	background:#18181b;
+
+	padding:20px;
+
+	overflow-y:auto;
+
+	color:white;
+
+	border-right:1px solid #333;
+
+}
+
+
+
+/* CANVAS */
+
+#gjs {
+
+	flex:1;
+
+	height:100%;
+
+	width:calc(100vw - 260px);
+
+}
+
+
+
+/* GRAPES CANVAS */
+
+.gjs {
+
+	height:100%;
+
+}
+
+
+
+.gjs-cv-canvas {
+
+	position:absolute;
+
+	top:0;
+
+	left:0;
+
+	width:100% !important;
+
+	height:100% !important;
+
+	background:#0f172a;
+
+}
+
+
+
+.gjs-frame-wrapper {
+
+	display:flex;
+
+	justify-content:center;
+
+	padding:40px;
+
+}
+
+
+
+.gjs-frame {
+
+	width:100%;
+
+	height:100%;
+
+}
+
+
+
+/* BLOCK DESIGN */
+
+.gjs-block {
+
+	width:100% !important;
+
+	min-height:60px;
+
+	margin-bottom:12px;
+
+	border-radius:12px;
+
+	background:#27272a;
+
+	border:1px solid #3f3f46;
+
+	color:white;
+
+}
+
+
+
+.gjs-block:hover {
+
+	background:#3f3f46;
+
+}
+
+
+
+/* REMOVE TOP BLOCK POSITION */
+
+.gjs-blocks-c {
+
+	position:static !important;
+
+}
+
+
+
+/* PAGE INSIDE CANVAS */
+
+.gjs-cv-canvas iframe {
+
+	background:white;
+
+	border-radius:16px;
+
+	box-shadow:
+
+	0 20px 60px rgba(0,0,0,.4);
+
+}

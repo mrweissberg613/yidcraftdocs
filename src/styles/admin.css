@@ -1,0 +1,121 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background: #101820;
+	color: white;
+	margin: 0;
+	padding: 0;
+}
+
+.admin-container {
+	max-width: 1000px;
+	margin: 50px auto;
+	padding: 20px;
+}
+
+.card {
+	background: #182632;
+	border-radius: 16px;
+	padding: 30px;
+	box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+h1 {
+	color: #55d66b;
+}
+
+input,
+textarea {
+	width: 100%;
+	padding: 12px;
+	border-radius: 8px;
+	border: 1px solid #334;
+	background: #0d141a;
+	color: white;
+	margin-top: 8px;
+}
+
+textarea {
+	font-family: monospace;
+	resize: vertical;
+}
+
+button,
+.button {
+	display: inline-block;
+	background: #55d66b;
+	color: black;
+	padding: 12px 22px;
+	border-radius: 10px;
+	border: none;
+	cursor: pointer;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+button:hover,
+.button:hover {
+	background: #74ed87;
+}
+
+.page-list {
+	display: grid;
+	gap: 15px;
+}
+
+.page-card {
+	background: #22313d;
+	padding: 20px;
+	border-radius: 12px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+a {
+	color: #55d66b;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+label {
+	display: block;
+	margin-bottom: 15px;
+}
+.editor-container {
+	background: #182632;
+	padding: 25px;
+	border-radius: 16px;
+}
+
+.editor-toolbar {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 20px;
+}
+
+.editor-toolbar button {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.editor-area {
+	background: white;
+	border-radius: 12px;
+	overflow: hidden;
+}
+
+.preview {
+	background: white;
+	color: black;
+	padding: 30px;
+	min-height: 600px;
+}
+
+.editor-info {
+	margin-top: 15px;
+	color: #aaa;
+}
