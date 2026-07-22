@@ -32,7 +32,7 @@ export default defineConfig({
 				
 				
 				starlightBlog({
-				rss: true,
+				rss: false,
 				authors: {
 				mrweissberg: {
 				name: 'MrWeissberg',
