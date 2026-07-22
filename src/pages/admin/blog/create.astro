@@ -1,0 +1,139 @@
+---
+import "../../../styles/admin.css";
+import { isAuthenticated } from "../../../lib/auth";
+
+
+if (!isAuthenticated(Astro.cookies)) {
+
+	return Astro.redirect("/admin");
+
+}
+
+---
+
+<html>
+
+<head>
+
+<title>
+Create Blog Post
+</title>
+
+</head>
+
+
+<body>
+
+
+<div class="admin-container">
+
+
+<div class="card">
+
+
+<h1>
+Create Blog Post
+</h1>
+
+
+
+<form method="POST" action="/api/admin/blog/create">
+
+
+<label>
+Title
+</label>
+
+<br>
+
+<input
+	type="text"
+	name="title"
+	required
+>
+
+
+<br><br>
+
+
+
+<label>
+Post Date
+</label>
+
+<br>
+
+<input
+	type="datetime-local"
+	name="date"
+>
+
+
+<br><br>
+
+
+
+<label>
+
+<input
+	type="checkbox"
+	name="useNow"
+>
+
+Use current date and time
+
+</label>
+
+
+<br><br>
+
+
+
+<label>
+Content
+</label>
+
+<br>
+
+<textarea
+	name="body"
+	rows="15"
+	required
+></textarea>
+
+
+<br><br>
+
+
+
+<button
+	class="button"
+	type="submit"
+>
+Create Post
+</button>
+
+
+</form>
+
+
+<br>
+
+
+<a
+	class="button"
+	href="/admin/dashboard"
+>
+← Back
+</a>
+
+
+</div>
+
+
+</div>
+
+
+</body>
+
+</html>

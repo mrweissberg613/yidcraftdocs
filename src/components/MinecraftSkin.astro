@@ -1,0 +1,177 @@
+---
+const { username } = Astro.props;
+
+let skin = "";
+
+try {
+
+	const uuidResponse = await fetch(
+		`https://api.mojang.com/users/profiles/minecraft/${username}`
+	);
+
+
+	if (uuidResponse.ok) {
+
+		const uuidData = await uuidResponse.json();
+
+
+		const profileResponse = await fetch(
+			`https://sessionserver.mojang.com/session/minecraft/profile/${uuidData.id}`
+		);
+
+
+		if(profileResponse.ok){
+
+			const profile = await profileResponse.json();
+
+
+			const decoded = JSON.parse(
+				Buffer.from(
+					profile.properties[0].value,
+					"base64"
+				).toString()
+			);
+
+
+			skin = decoded.textures.SKIN.url;
+
+		}
+
+	}
+
+} catch(error){
+
+	console.error(
+		`Failed loading ${username} skin`,
+		error
+	);
+
+}
+
+
+const id =
+	`skin-${username}-${Math.random().toString(36).slice(2)}`;
+
+---
+
+
+{skin ? (
+
+<div
+	class="minecraft-skin"
+	id={id}
+	data-skin={skin}
+>
+
+<canvas width="200" height="320"></canvas>
+
+</div>
+
+) : (
+
+<p>
+	No skin found for {username}
+</p>
+
+)}
+
+
+
+<script>
+import { SkinViewer } from "skinview3d";
+
+
+document.querySelectorAll(".minecraft-skin").forEach((container)=>{
+
+
+	const canvas =
+		container.querySelector("canvas");
+
+
+	const skin =
+		container.dataset.skin;
+
+
+
+	if(canvas && skin){
+
+
+		const viewer =
+			new SkinViewer({
+
+				canvas,
+
+				width:200,
+
+				height:320,
+
+				skin
+
+			});
+
+
+
+		viewer.controls.enableRotate = false;
+
+
+		viewer.playerObject.scale.set(
+			1,
+			1,
+			1
+		);
+
+
+		viewer.playerObject.position.y = -2;
+
+
+
+		viewer.camera.position.set(
+			18,
+			5,
+			35
+		);
+
+
+		viewer.camera.lookAt(
+			0,
+			-1.5,
+			0
+		);
+
+
+	}
+
+});
+
+</script>
+
+
+
+<style>
+
+.minecraft-skin {
+
+	width:200px;
+
+	height:320px;
+
+	display:flex;
+
+	justify-content:center;
+
+	align-items:center;
+
+	overflow:hidden;
+
+}
+
+
+.minecraft-skin canvas {
+
+	width:200px;
+
+	height:320px;
+
+}
+
+</style>

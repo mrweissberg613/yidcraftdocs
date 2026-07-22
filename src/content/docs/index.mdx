@@ -4,283 +4,109 @@ description: Official Yidcraft Minecraft server wiki.
 
 tableOfContents: false
 template: splash
+
 hero:
   tagline: Welcome to Yidcraft
-
 
   actions:
     - text: Getting Started
       link: /guides/intro/
       icon: right-arrow
+
     - text: How To Join
       link: /guides/how-to-join/
       icon: right-arrow
+
     - text: Features
       link: /features/intro/
       icon: right-arrow
 ---
 
-<style>{`
-  :root {
-    --sl-color-accent: #0066cc;
-    --sl-color-accent-high: #0052a3;
-    --color-blue: #0066cc;
-    --color-blue-dark: #003da5;
-    --color-blue-light: #0084ff;
-    --color-white: #ffffff;
-    --color-bg-dark: #0f172a;
-    --color-bg-darker: #020617;
-    --color-text: #e2e8f0;
-    --color-text-muted: #94a3b8;
-  }
+import MinecraftSkin from "../../components/MinecraftSkin.astro";
+import "../../styles/yidcraft-home.css";
+
+<img 
+  src="../../assets/yidcraftbanner.png"
+  alt="YidCraft Server Banner"
+  class="server-banner"
+/>
 
 
-  body {
-  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: var(--color-text);
-
-  background-color: #060014;
-
-  background-image:
-    radial-gradient(circle at 25% 25%, rgba(0,102,204,0.08) 0%, transparent 35%),
-    radial-gradient(circle at 75% 75%, rgba(255,255,255,0.03) 0%, transparent 35%),
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-
-  background-size:
-    auto,
-    auto,
-    40px 40px,
-    40px 40px;
-
-  background-position:
-    center,
-    center,
-    center,
-    center;
+<style is:global>{`
+.server-banner {
+  width:100%;
+  max-width:900px;
+  height:auto;
+  display:block;
+  margin:2rem auto;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+  transition:.3s ease;
 }
 
-  .hero {
-    position: relative;
-    overflow: hidden;
-    background: transparent !important;
-    padding: 4rem 2rem !important;
-    min-height: 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
+.server-banner:hover {
+  transform:translateY(-5px);
+  box-shadow:0 15px 40px rgba(0,102,204,.35);
 }
-
-	
-
-  
-
-  .hero > * {
-    position: relative;
-    z-index: 2;
-  }
-
-  
-
-  
-
-
-
-
-
-
-  h1 {
-    font-size: 3.5rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    color: var(--color-white);
-    text-align: center;
-    line-height: 1.1;
-    margin-bottom: 1rem;
-    text-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
-  }
-
-  .tagline {
-    font-size: 1.25rem;
-    color: var(--color-text);
-    text-align: center;
-    margin-bottom: 2rem;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 3rem;
-  }
-
-  .hero [class*="Button"],
-  .hero a[class*="button"],
-  .hero button {
-    padding: 0.875rem 1.75rem !important;
-    background: rgba(0, 102, 204, 0.1) !important;
-    backdrop-filter: blur(10px) !important;
-    border: 1.5px solid rgba(0, 102, 204, 0.4) !important;
-    border-radius: 10px !important;
-    color: var(--color-blue-light) !important;
-    font-weight: 500 !important;
-    font-size: 0.95rem !important;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    cursor: pointer !important;
-    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15) !important;
-    text-decoration: none !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 0.5rem !important;
-  }
-
-  .hero [class*="Button"]:hover,
-  .hero a[class*="button"]:hover,
-  .hero button:hover {
-    background: rgba(0, 102, 204, 0.2) !important;
-    border-color: rgba(0, 102, 204, 0.7) !important;
-    color: var(--color-white) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 12px 24px rgba(0, 102, 204, 0.25) !important;
-  }
-
-  .hero [class*="Button"]:active,
-  .hero a[class*="button"]:active,
-  .hero button:active {
-    transform: translateY(0px) !important;
-    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15) !important;
-  }
-
-  .hero-image {
-    max-width: 280px;
-    width: 100%;
-    height: auto;
-    margin: 2rem 0;
-    filter: drop-shadow(0 10px 30px rgba(0, 102, 204, 0.2));
-    animation: float 3s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
-
-  
-
-  h2 {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-top: 4rem;
-    margin-bottom: 2.5rem;
-    color: var(--color-white);
-    letter-spacing: -0.01em;
-  }
-
-  main {
-    display: flex;
-    flex-direction: column;
-    align-items: center !important;
-  }
-
-  .staff-section {
-    text-align: center;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .staff-section > div {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .staff-card {
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    cursor: pointer;
-    border-radius: 14px;
-    padding: 1.5rem;
-    background: rgba(0, 102, 204, 0.08);
-    border: 1px solid rgba(0, 102, 204, 0.15);
-    backdrop-filter: blur(8px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  .staff-card:hover {
-    transform: translateY(-8px);
-    background: rgba(0, 102, 204, 0.12);
-    border-color: rgba(0, 102, 204, 0.4);
-    box-shadow: 0 12px 32px rgba(0, 102, 204, 0.25);
-  }
-
-  .staff-card img {
-    border: 2px solid rgba(0, 102, 204, 0.3);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  }
-
-  .staff-card:hover img {
-    border-color: rgba(0, 102, 204, 0.6);
-    filter: brightness(1.1) drop-shadow(0 0 12px rgba(0, 102, 204, 0.3));
-  }
-
-  .staff-card strong {
-    color: var(--color-white);
-    display: block;
-    margin-top: 0.75rem;
-    font-size: 1.05rem;
-  }
-
-  .staff-card > div:last-child {
-    color: var(--color-text-muted);
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-  }
 `}</style>
+
 
 
 
 ## Meet the Staff
 
-<div style="text-align:center; margin:2rem 0;">
+<div class="staff-container">
 
-<div style="display:flex; justify-content:center; margin-bottom:2rem;">
-  <div className="staff-card" style="text-align:center;">
-    <img src="/assets/owner-pfp.png" alt="Owner avatar" style="border-radius:50%; width:120px; height:120px; object-fit:cover; margin-bottom:12px;" />
-    <div><strong>Chokitu</strong></div>
-    <div style="font-size:0.9rem; opacity:0.8;">Owner</div>
-  </div>
-</div>
+  <div class="staff-row directors">
 
-<div style="display:flex; justify-content:center; gap:3rem; margin-bottom:2rem; align-items:center;">
-  <div className="staff-card" style="text-align:center;">
-    <img src="/assets/coowner-pfp.png" alt="Co-Owner avatar" style="border-radius:50%; width:120px; height:120px; object-fit:cover; margin-bottom:12px;" />
-    <div><strong>MrWeissberg</strong></div>
-    <div style="font-size:0.9rem; opacity:0.8;">Co-Owner</div>
+    <div class="staff-card">
+      <MinecraftSkin username="Chokitu" />
+
+      <strong>Chokitu</strong>
+      <span>Director</span>
+    </div>
+
+
+    <div class="staff-card move-up">
+
+      <MinecraftSkin username="MrWeissberg" />
+
+      <strong>MrWeissberg</strong>
+
+      <span>Director</span>
+
+    </div>
+
   </div>
 
-  <div className="staff-card" style="text-align:center;">
-    <img src="/assets/srmod-pfp.png" alt="Sr mod avatar" style="border-radius:50%; width:120px; height:120px; object-fit:cover; margin-bottom:12px;" />
-    <div><strong>Yyp987</strong></div>
-    <div style="font-size:0.9rem; opacity:0.8;">Sr. Mod</div>
-  </div>
-</div>
 
-<div style="display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; align-items:center;">
-  <div className="staff-card" style="text-align:center;">
-    <img src="/assets/artist-pfp.png" alt="Artist" style="border-radius:50%; width:120px; height:120px; object-fit:cover; margin-bottom:12px;" />
-    <div><strong>Sneaky Snack</strong></div>
-    <div style="font-size:0.9rem; opacity:0.8;">Artist</div>
+  <div class="staff-row">
+
+    <div class="staff-card">
+      <MinecraftSkin username="Yyp987" />
+
+      <strong>Yyp987</strong>
+      <span>Admin</span>
+    </div>
+
+
+    <div class="staff-card move-up">
+      <MinecraftSkin username="ChabadChosid" />
+
+      <strong>ChabadChosid</strong>
+      <span>Admin</span>
+    </div>
+
+
+    <div class="staff-card move-up">
+
+      <img src="/assets/artist-pfp.png" alt="Sneaky Snack" />
+
+      <strong>Sneaky Snack</strong>
+      <span>Artist</span>
+
+    </div>
+
   </div>
-</div>
 
 </div>

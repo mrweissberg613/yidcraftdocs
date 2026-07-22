@@ -19,6 +19,7 @@ const session =
 		? verifySession(token)
 		: null;
 
+
 const username =
 	typeof session === "object" && session
 		? session.username
@@ -52,11 +53,18 @@ const username =
 
 
 		<p>
-			Manage your YidCraft Wiki pages from here.
+			Manage your YidCraft Wiki from here.
 		</p>
 
 
+
 		<br>
+
+
+
+		<h2>
+			Wiki Pages
+		</h2>
 
 
 		<a class="button" href="/admin/pages">
@@ -68,6 +76,51 @@ const username =
 
 
 		<br><br>
+
+
+
+		<h2>
+			Blog
+		</h2>
+
+
+		<a class="button" href="/admin/blog/create">
+
+			Create Blog Post
+
+		</a>
+
+
+
+		<br><br>
+
+
+		<a class="button" href="/admin/blog">
+
+			Manage Blog Posts
+
+		</a>
+
+
+
+		<br><br>
+
+
+
+		<h2>
+			Media
+		</h2>
+
+
+		<a class="button" href="/admin/uploads">
+
+			Upload Images
+
+		</a>
+
+
+
+		<br><br><br>
 
 
 
@@ -85,5 +138,6 @@ const username =
 
 
 </body>
+
 
 </html>

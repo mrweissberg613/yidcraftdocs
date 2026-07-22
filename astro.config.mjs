@@ -3,8 +3,10 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import react from '@astrojs/react';
 import vercel from '@astrojs/vercel';
-
+import starlightScrollToTop from 'starlight-scroll-to-top';
+import starlightBlog from 'starlight-blog'
 export default defineConfig({
+	
 
 	output: 'server',
 
@@ -15,15 +17,34 @@ export default defineConfig({
 
 		}
 	},
+	site: 'https://yidcraft.vercel.app',
 
 	integrations: [
 		react(),
 
 		starlight({
+			
 
 			title: 'Yid Craft Wiki',
+			plugins: [starlightScrollToTop(), 
+				
+				
+				
+				
+				starlightBlog({
+				rss: true,
+				authors: {
+				mrweissberg: {
+				name: 'MrWeissberg',
+				title: 'Director',
+				picture: '/coowner-pfp.png', // Images in the `public` directory are supported.
+				 },
+			},
+			})],
 
 			tableOfContents: true,
+			
+			
 
 			favicon: './src/assets/favicon.png',
 
@@ -96,6 +117,8 @@ export default defineConfig({
 						{ label: 'Teams', slug: 'features/teams' },
 
 						{ label: 'Brewing', slug: 'features/brewing' },
+						
+						{ label: 'Player Market', slug: 'features/playermarket' },
 
 						{ label: 'Chest Shops', slug: 'features/chestshops' },
 

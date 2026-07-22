@@ -1,0 +1,81 @@
+---
+import "../../../styles/admin.css";
+
+
+const title =
+	Astro.url.searchParams.get("title")
+	|| "Blog Post";
+
+---
+
+<html>
+
+<head>
+
+<title>
+Created
+</title>
+
+</head>
+
+
+<body>
+
+
+<div class="admin-container">
+
+
+<div class="card">
+
+
+<h1>
+✅ Created Successfully
+</h1>
+
+
+<p>
+Your blog post:
+</p>
+
+
+<h2>
+{title}
+</h2>
+
+
+<p>
+was created successfully.
+</p>
+
+
+<br>
+
+
+<a
+	class="button"
+	href="/admin/blog/create"
+>
+Create Another
+</a>
+
+
+<br><br>
+
+
+<a
+	class="button"
+	href="/admin/dashboard"
+>
+Back To Dashboard
+</a>
+
+
+</div>
+
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,177 +1,203 @@
 ---
 title: Teams System
-description: Learn about the Yidcraft Teams system and how it works.
+description: Learn about the YidCraft Teams system and how it works.
 ---
 
-Teams let you group up with other players to build, play, and progress together. You can share money, manage territory, and work as a team.
+import { Steps, Aside } from '@astrojs/starlight/components';
 
-Your current team is displayed on the scoreboard
+Teams let players group together to build, play, and progress together. Share a team, manage a home base, communicate privately, and work toward common goals as a unit.
+
+Your current team is displayed on the **scoreboard**.
+
+---
+
+## Getting Started
+
+<Steps>
+
+1. **Create or Join a Team**
+
+   To create your own team, use:
+
+   ```bash
+   /team create <name>
+   ```
+
+   > Creating a team costs **250 coins**. A confirmation prompt will appear before the payment is taken.
+
+   To join an existing team, you must receive and accept an invite from a team owner:
+
+   ```bash
+   /team invite <player>
+   /team accept
+   ```
+
+2. **Leave a Team**
+
+   Use:
+
+   ```bash
+   /team leave
+   ```
+
+   > **Note:** Team owners cannot leave their team until they transfer ownership or disband the team.
+
+3. **View Team Information**
+
+   Use:
+
+   ```bash
+   /team info
+   ```
+
+   Displays:
+
+   - Team name
+   - Owner
+   - Member count
+   - Online members
+   - Home status
+   - Creation date
+
+</Steps>
 
 ---
 
 ## Basic Commands
 
-```bash
-/team create <name>
-```
-Create a new team.
-
-```bash
-/team join <team>
-```
-Join a team.
-
-```bash
-/team leave
-```
-Leave your current team.
-
-```bash
-/team info [team/player]
-```
-View information about a team or a player’s team.
-
-```bash
-/team help
-```
-Shows the commands you can use.
+| Command | Description |
+|---|---|
+| `/team create <name>` | Create a new team (costs 250 coins) |
+| `/team invite <player>` | Invite a player to your team |
+| `/team accept` | Accept a pending team invite |
+| `/team deny` | Deny a pending team invite |
+| `/team leave` | Leave your current team |
+| `/team members` | List all team members and online status |
+| `/team info` | View your team's information |
+| `/team help` | Show available team commands |
 
 ---
 
 ## Team Chat
 
-```bash
-/team chat [message]
-```
-Send a message to team chat. If no message is included, it toggles team chat mode.
+Team Chat creates a private channel visible only to online team members.
+
+Enable or disable Team Chat:
 
 ```bash
-/team allychat [message]
+/teamchat
 ```
-Send a message to allied teams.
+
+Alias:
+
+```bash
+/tc
+```
+
+When enabled, your messages will only be visible to your team:
+
+```
+[Team] Steve: Let's meet at the base
+```
+
+When disabled, messages will appear in normal public chat.
 
 ---
 
-## Homes and Warps
+## Team Homes
+
+Team owners can set a shared home location that all team members can teleport to.
+
+```bash
+/team sethome
+/team home
+```
+
+`/team sethome` is only available to the team owner.
+
+---
+
+## Teleport Countdown
+
+When using:
 
 ```bash
 /team home
 ```
-Teleport to your team home.
 
-```bash
-/team sethome
-```
-Set your team home.
+a countdown will begin before teleporting.
 
-```bash
-/team delhome
-```
-Remove your team home.
+The teleport will be cancelled if you:
 
-```bash
-/team warp <name> [password]
-```
-Teleport to a team warp.
-
-```bash
-/team setwarp <name> [password]
-```
-Create a team warp.
-
-```bash
-/team delwarp <name>
-```
-Delete a team warp.
+- Move too far away
+- Take damage
+- Attack an entity
+- Disconnect
 
 ---
 
-## Team Economy
+## Team Management
 
-```bash
-/team bal
-```
-Check your team balance.
+The following commands are available to **team owners**.
 
-```bash
-/team deposit <amount>
-```
-Deposit money into the team balance.
-
-```bash
-/team withdraw <amount>
-```
-Withdraw money from the team balance.
-
----
-
-## Rankings
-
-```bash
-/team top
-```
-View top teams.
-
-```bash
-/team baltop
-```
-View richest teams.
-
-```bash
-/team rank [team]
-```
-Check a team’s rank.
-
----
-
-## Other Features
-
-```bash
-/team echest
-```
-Open the team ender chest.
-
-```bash
-/team pvp
-```
-Toggle PvP between teammates.
-
----
-
-## Team Management (Leader Only)
-
-These commands can only be used by the team owner.
+### Member Management
 
 ```bash
 /team invite <player>
 /team kick <player>
-/team ban <player>
-/team unban <player>
 ```
 
-```bash
-/team promote <player>
-/team demote <player>
-/team setowner <player>
-/team title <player/me> <title>
-```
+- `/team invite` sends a team invite that expires after 60 seconds.
+- `/team kick` removes a player from the team.
+
+### Ownership Transfer
 
 ```bash
-/team name <name>
-/team description <description>
-/team color <color>
-/team tag
-/team open
+/team owner <player>
+```
+
+Transfers ownership of the team to another member.
+
+> After transferring ownership, you become a normal team member and the new owner gains full control.
+
+---
+
+## Rename Team
+
+Owners can rename their team:
+
+```bash
+/team rename <name>
+```
+
+Team names support color codes:
+
+```text
+&cRedTeam
+```
+
+Hex colors are also supported:
+
+```text
+&#FF5733OrangeTeam
 ```
 
 ---
 
-## Disbanding a Team (Leader Only)
+## Disband Team
 
-Only the team owner can do this:
+To permanently delete your team:
 
 ```bash
 /team disband
 ```
 
-This permanently deletes the team.
+<Aside type="danger">
+This permanently deletes your team. All members are removed, the team home is cleared, and pending invites are cancelled.
+
+The 250 coin creation cost will not be refunded.
+</Aside>
+
+A confirmation prompt will appear before the team is deleted.
+
+---

@@ -1,0 +1,320 @@
+:root {
+  --yid-blue: #0066cc;
+  --yid-blue-light: #0084ff;
+}
+
+
+body {
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background:#060014;
+
+  color:#e2e8f0;
+
+}
+
+
+
+/* Hero */
+
+.hero {
+
+  background:transparent !important;
+
+min-height:500px;
+
+  padding:3rem 2rem !important;
+
+  margin-top:-2rem;
+
+  border-radius:32px;
+
+  overflow:hidden;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+
+  align-items:center;
+
+  backdrop-filter:blur(10px);
+  min-height:400px !important;
+  padding-top:1rem !important;
+  padding-bottom:1rem !important;
+    margin-bottom:-3.8rem !important;
+
+}
+
+
+
+.hero h1 {
+
+  color:white;
+
+  font-size:3.5rem;
+
+  font-weight:800;
+
+  text-align:center;
+
+}
+
+
+
+.hero .tagline {
+
+  color:#e2e8f0;
+
+  font-size:1.25rem;
+
+  text-align:center;
+
+}
+
+
+
+.hero-actions {
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:1rem;
+
+  flex-wrap:wrap;
+
+}
+
+
+
+.hero-actions a {
+
+  padding:.875rem 1.75rem;
+
+  border-radius:10px;
+
+  border:1px solid rgba(0,102,204,.5);
+
+  background:rgba(0,102,204,.15);
+
+  color:#0084ff;
+
+  text-decoration:none;
+
+  transition:.3s;
+
+}
+
+
+
+.hero-actions a:hover {
+
+  transform:translateY(-3px);
+
+  background:rgba(0,102,204,.3);
+
+  color:white;
+
+}
+
+
+
+
+
+/* Staff */
+
+/* Staff */
+
+.sl-markdown-content {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+
+.staff-container {
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2rem;
+}
+
+
+.staff-row {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:3rem;
+  flex-wrap:wrap;
+  width:100%;
+}
+
+
+.directors {
+  margin-bottom:1rem;
+}
+
+
+.staff-card {
+
+  width:230px;
+  height:430px;
+
+  box-sizing:border-box;
+
+  padding:1.5rem;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:center;
+
+  text-align:center;
+
+  border-radius:14px;
+
+  background:rgba(0,102,204,.08);
+
+  border:1px solid rgba(0,102,204,.2);
+
+  backdrop-filter:blur(8px);
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,.25);
+
+
+  cursor:pointer;
+
+  transition:
+    all .3s cubic-bezier(.16,1,.3,1);
+
+}
+
+
+.staff-card:hover {
+
+  transform:translateY(-8px);
+
+  background:
+    rgba(0,102,204,.12);
+
+  border-color:
+    rgba(0,102,204,.4);
+
+  box-shadow:
+    0 12px 32px rgba(0,102,204,.3);
+
+}
+
+
+
+.minecraft-skin {
+
+  width:200px;
+
+  height:320px;
+
+  transition:
+    all .3s ease;
+
+}
+
+
+
+.staff-card img {
+
+  width:200px;
+
+  height:320px;
+
+  object-fit:contain;
+
+  transition:
+    all .3s ease;
+
+}
+
+
+
+.staff-card:hover img,
+.staff-card:hover .minecraft-skin {
+
+  filter:
+    brightness(1.1)
+    drop-shadow(0 0 12px rgba(0,102,204,.3));
+
+}
+
+
+
+.staff-card strong {
+
+  color:white;
+
+  font-size:1.1rem;
+
+  margin-top:10px;
+
+}
+
+
+
+.staff-card span {
+
+  color:#94a3b8;
+
+  margin-top:5px;
+
+}
+.move-up {
+  transform:translateY(-8px);
+}
+
+
+.move-up:hover {
+  transform:translateY(-20px);
+}
+.move-upc {
+  transform:translateY(-100px);
+}
+
+
+.move-upc:hover {
+  transform:translateY(-20px);
+}
+
+
+
+
+
+.server-banner {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+
+  display: block;
+
+  margin: 2rem auto;
+
+  border-radius: 14px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+
+  transition: all 0.3s ease;
+}
+
+
+.server-banner:hover {
+  transform: translateY(-5px);
+
+  box-shadow: 0 15px 40px rgba(0,102,204,0.35);
+}
