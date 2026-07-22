@@ -24,6 +24,7 @@ export default defineConfig({
 
 		starlight({
 			
+			
 
 			title: 'Yid Craft Wiki',
 			plugins: [starlightScrollToTop(), 
@@ -46,11 +47,22 @@ export default defineConfig({
 			
 			
 
-			favicon: './src/assets/favicon.png',
+			favicon: '/images/favicon.png',
 
 
 			customCss: [
 				'./src/styles/global.css',
+			],
+			head: [
+				// Add ICO favicon fallback for Safari.
+				{
+				tag: 'link',
+				attrs: {
+					rel: 'icon',
+					href: '/images/favicon.png',
+					sizes: '32x32',
+				},
+				},
 			],
 
 
