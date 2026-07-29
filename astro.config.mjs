@@ -87,6 +87,15 @@ export default defineConfig({
 
 					href: 'https://discord.gg/xM4PMY2s9X'
 
+				},
+				{
+
+					icon: 'youtube',
+
+					label: 'Youtube',
+
+					href: 'https://www.youtube.com/@YidCraft613'
+
 				}
 
 			],
@@ -106,6 +115,8 @@ export default defineConfig({
 						{ label: 'Intro', slug: 'guides/intro' },
 
 						{ label: 'Rules', slug: 'guides/rules' },
+
+						{ label: 'Allowed Mods', slug: 'guides/mods' },
 
 						{ label: 'How to join', slug: 'guides/how-to-join' },
 
@@ -131,6 +142,8 @@ export default defineConfig({
 						{ label: 'Brewing', slug: 'features/brewing' },
 						
 						{ label: 'Player Market', slug: 'features/playermarket' },
+
+						{ label: 'Investing', slug: 'features/investing' },
 
 						{ label: 'Chest Shops', slug: 'features/chestshops' },
 
