@@ -1,0 +1,14 @@
+---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import ApplicationForm from "../../components/ApplicationForm.astro";
+import { partnershipManagerApplication } from "../../data/applications/staff";
+---
+
+<StarlightPage
+	frontmatter={{
+		title: "Partnership Manager Application",
+		description: "Apply to help manage partnerships and community collaborations."
+	}}
+>
+	<ApplicationForm config={partnershipManagerApplication} />
+</StarlightPage>

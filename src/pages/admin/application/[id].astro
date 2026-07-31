@@ -1,0 +1,101 @@
+---
+import "../../../styles/admin.css";
+import { isAuthenticated, verifySession } from "../../../lib/auth";
+import { getApplicationById, updateApplication, deleteApplication } from "../../../lib/applications";
+
+if (!isAuthenticated(Astro.cookies)) {
+	return Astro.redirect("/admin");
+}
+
+const token = Astro.cookies.get("admin_session")?.value;
+const session = token ? verifySession(token) : null;
+const username = typeof session === "object" && session ? session.username : "Admin";
+const id = Number(Astro.params.id);
+const application = getApplicationById(id);
+
+if (!application) {
+	return Astro.redirect("/admin/applications");
+}
+
+let message = "";
+
+if (Astro.request.method === "POST") {
+	const formData = await Astro.request.formData();
+	const action = String(formData.get("action") || "");
+	const notes = String(formData.get("notes") || "");
+
+	if (action === "accept") {
+		updateApplication(id, {
+			status: "Accepted",
+			admin_notes: notes,
+			reviewed_by: username,
+			reviewed_at: new Date().toISOString()
+		});
+		message = "Application accepted.";
+	} else if (action === "deny") {
+		updateApplication(id, {
+			status: "Denied",
+			admin_notes: notes,
+			reviewed_by: username,
+			reviewed_at: new Date().toISOString()
+		});
+		message = "Application denied.";
+	} else if (action === "delete") {
+		deleteApplication(id);
+		return Astro.redirect("/admin/applications");
+	} else {
+		updateApplication(id, {
+			admin_notes: notes,
+			reviewed_by: username,
+			reviewed_at: new Date().toISOString()
+		});
+		message = "Notes saved.";
+	}
+}
+
+const refreshed = getApplicationById(id);
+const currentApplication = refreshed || application;
+---
+
+<html>
+	<head>
+		<title>Application Review</title>
+	</head>
+	<body>
+		<div class="admin-container">
+			<div class="card">
+				<h1>Application Review</h1>
+				{message && <p>{message}</p>}
+				<p><strong>ID:</strong> {currentApplication.application_id}</p>
+				<p><strong>Type:</strong> {currentApplication.type}</p>
+				<p><strong>Minecraft:</strong> {currentApplication.minecraft}</p>
+				<p><strong>Discord:</strong> {currentApplication.discord}</p>
+				<p><strong>Status:</strong> {currentApplication.status}</p>
+				<p><strong>Submitted:</strong> {currentApplication.submitted_at}</p>
+
+				<h2>Answers</h2>
+				<div class="page-list">
+					{Object.entries(currentApplication.answers).map(([question, answer]) => (
+						<div class="page-card">
+							<strong>{question}</strong>
+							<p>{answer}</p>
+						</div>
+					))}
+				</div>
+
+				<h2>Admin Notes</h2>
+				<form method="POST">
+					<textarea name="notes" rows="6">{currentApplication.admin_notes}</textarea>
+					<br><br>
+					<button type="submit" name="action" value="save">Save Notes</button>
+					<button type="submit" name="action" value="accept">Accept</button>
+					<button type="submit" name="action" value="deny">Deny</button>
+					<button type="submit" name="action" value="delete">Delete</button>
+				</form>
+
+				<br>
+				<a class="button" href="/admin/applications">Back to Applications</a>
+			</div>
+		</div>
+	</body>
+</html>

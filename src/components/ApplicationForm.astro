@@ -1,0 +1,195 @@
+---
+import "../styles/applications.css";
+import { nanoid } from "nanoid";
+import dayjs from "dayjs";
+
+interface Field {
+	name: string;
+	label: string;
+	type: string;
+	required?: boolean;
+	placeholder?: string;
+	options?: Array<{ value: string; label: string }>;
+}
+
+interface Config {
+	title: string;
+	description: string;
+	type: string;
+	fields: Field[];
+}
+
+const { config } = Astro.props as { config: Config };
+
+const fieldNames = config.fields.map((field) => field.name);
+const initialAnswers = Object.fromEntries(fieldNames.map((name) => [name, ""]));
+
+const formState = {
+	submitting: false,
+	error: "",
+	success: false,
+	applicationId: ""
+};
+
+let submissionMessage = "";
+let submissionError = "";
+let submittedApplicationId = "";
+let formValues = { minecraft: "", discord: "", answers: { ...initialAnswers } };
+
+if (Astro.request.method === "POST") {
+	try {
+		const formData = await Astro.request.formData();
+		const minecraft = String(formData.get("minecraft") || "").trim();
+		const discord = String(formData.get("discord") || "").trim();
+		const status = String(formData.get("status") || "Pending").trim();
+		const answers: Record<string, string> = {};
+
+		for (const field of config.fields) {
+			if (field.name === "minecraft") continue;
+			if (field.name === "discord") continue;
+			const value = String(formData.get(field.name) || "").trim();
+			answers[field.name] = value;
+		}
+
+		const errors: string[] = [];
+
+		if (!minecraft) errors.push("Minecraft username is required.");
+		if (!discord) errors.push("Discord username is required.");
+
+		for (const field of config.fields) {
+			if (field.name === "minecraft" || field.name === "discord") continue;
+			if (field.required && !answers[field.name]) {
+				errors.push(`${field.label} is required.`);
+			}
+		}
+
+		if (errors.length > 0) {
+			throw new Error(errors.join("\n"));
+		}
+
+		const applicationId = `APP-${nanoid(8).toUpperCase()}`;
+		const submittedAt = dayjs().toISOString();
+
+		const response = await fetch(`${Astro.url.origin}/api/applications/submit`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				type: config.type,
+				minecraft,
+				discord,
+				status,
+				answers,
+				applicationId,
+				submittedAt
+			})
+		});
+
+		const result = await response.json();
+
+		if (!response.ok || !result.success) {
+			throw new Error(result.error || "Something went wrong while submitting your application.");
+		}
+
+		submittedApplicationId = result.applicationId;
+		submissionMessage = `Your application was submitted successfully. Your application ID is ${result.applicationId}.`;
+	} catch (error) {
+		submissionError = error instanceof Error ? error.message : "Unable to submit the application.";
+	}
+}
+
+const renderField = (field: Field) => {
+	const name = field.name;
+	const label = field.label;
+	const required = field.required;
+
+	if (field.type === "textarea") {
+		return `
+		<div class="form-group">
+			<label for="${name}">${label}${required ? " <span class=\"required\">*</span>" : ""}</label>
+			<textarea id="${name}" name="${name}" ${required ? "required" : ""}></textarea>
+		</div>`;
+	}
+
+	if (field.type === "select") {
+		return `
+		<div class="form-group">
+			<label for="${name}">${label}${required ? " <span class=\"required\">*</span>" : ""}</label>
+			<select id="${name}" name="${name}" ${required ? "required" : ""}>
+				${(field.options || []).map((option) => `<option value="${option.value}">${option.label}</option>`).join("")}
+			</select>
+		</div>`;
+	}
+
+	if (field.type === "checkbox") {
+		return `
+		<div class="form-group">
+			<label>
+				<input type="checkbox" name="${name}" value="yes" /> ${label}${required ? " <span class=\"required\">*</span>" : ""}
+			</label>
+		</div>`;
+	}
+
+	let inputType = "text";
+	if (field.type === "number") inputType = "number";
+	if (field.type === "email") inputType = "email";
+
+	return `
+	<div class="form-group">
+		<label for="${name}">${label}${required ? " <span class=\"required\">*</span>" : ""}</label>
+		<input type="${inputType}" id="${name}" name="${name}" placeholder="${field.placeholder || ""}" ${required ? "required" : ""} />
+	</div>`;
+};
+---
+
+<div class="application-container">
+	<div class="application-card">
+		<h1>{config.title}</h1>
+		<p>{config.description}</p>
+
+		{submissionMessage && (
+			<div class="success-box">
+				<p><strong>Application submitted successfully.</strong></p>
+				<p>Your application ID: {submittedApplicationId}</p>
+			</div>
+		)}
+
+		{submissionError && (
+			<div class="error-box">
+				<p><strong>We could not submit your application.</strong></p>
+				<p>{submissionError}</p>
+			</div>
+		)}
+
+		<form method="POST" class="application-form">
+			<div class="form-group">
+				<label for="minecraft">Minecraft Username <span class="required">*</span></label>
+				<input id="minecraft" name="minecraft" type="text" required />
+			</div>
+
+			<div class="form-group">
+				<label for="discord">Discord Username <span class="required">*</span></label>
+				<input id="discord" name="discord" type="text" required />
+			</div>
+
+			{config.fields.filter((field) => field.name !== "minecraft" && field.name !== "discord").map((field) => (
+				<div class="form-group" set:html={renderField(field)} />
+			))}
+
+			<button id="submit-button" class="submit-button" type="submit">Submit Application</button>
+		</form>
+	</div>
+</div>
+
+<script>
+	const form = document.querySelector('.application-form');
+	const submitButton = document.getElementById('submit-button');
+
+	if (form && submitButton) {
+		form.addEventListener('submit', () => {
+			submitButton.disabled = true;
+			submitButton.textContent = 'Submitting...';
+		});
+	}
+</script>

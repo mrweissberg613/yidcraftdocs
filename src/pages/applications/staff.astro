@@ -1,0 +1,14 @@
+---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import ApplicationForm from "../../components/ApplicationForm.astro";
+import { staffApplication } from "../../data/applications/staff";
+---
+
+<StarlightPage
+	frontmatter={{
+		title: "Staff Application",
+		description: "Apply to join the YidCraft staff team."
+	}}
+>
+	<ApplicationForm config={staffApplication} />
+</StarlightPage>

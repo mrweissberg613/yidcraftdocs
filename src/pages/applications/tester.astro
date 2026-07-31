@@ -1,0 +1,14 @@
+---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import ApplicationForm from "../../components/ApplicationForm.astro";
+import { testerApplication } from "../../data/applications/staff";
+---
+
+<StarlightPage
+	frontmatter={{
+		title: "Beta Tester Application",
+		description: "Apply to help test upcoming features on YidCraft."
+	}}
+>
+	<ApplicationForm config={testerApplication} />
+</StarlightPage>
