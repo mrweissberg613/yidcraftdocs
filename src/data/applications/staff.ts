@@ -216,3 +216,111 @@ export const mediaApplication = {
 	]
 };
 
+export const builderApplication = {
+	title: "Builder Application",
+	description: "Apply to help build the world of YidCraft.",
+	type: "builder",
+	fields: [
+		{
+			name: "minecraft",
+			label: "Minecraft Username",
+			type: "text",
+			required: true,
+			placeholder: "Steve"
+		},
+		{
+			name: "discord",
+			label: "Discord Username",
+			type: "text",
+			required: true,
+			placeholder: "Builder"
+		},
+		{
+			name: "discord_client_id",
+			label: "Discord Client ID",
+			type: "text",
+			required: true,
+			placeholder: "123456789012345678"
+		},
+		{
+			name: "experience",
+			label: "What building or design experience do you have?",
+			type: "textarea",
+			required: true
+		},
+		{
+			name: "style",
+			label: "What style of builds do you enjoy making?",
+			type: "textarea",
+			required: true
+		},
+		{
+			name: "availability",
+			label: "How often would you be available to build?",
+			type: "text",
+			required: true,
+			placeholder: "Several hours per week"
+		},
+		{
+			name: "extra",
+			label: "Anything else you'd like us to know?",
+			type: "textarea",
+			required: false
+		}
+	]
+};
+
+export const testerApplication = {
+	title: "Beta Tester Application",
+	description: "Apply to help test upcoming features on YidCraft.",
+	type: "tester",
+	fields: [
+		{
+			name: "minecraft",
+			label: "Minecraft Username",
+			type: "text",
+			required: true,
+			placeholder: "Steve"
+		},
+		{
+			name: "discord",
+			label: "Discord Username",
+			type: "text",
+			required: true,
+			placeholder: "Tester"
+		},
+		{
+			name: "discord_client_id",
+			label: "Discord Client ID",
+			type: "text",
+			required: true,
+			placeholder: "123456789012345678"
+		},
+		{
+			name: "experience",
+			label: "What testing or bug-reporting experience do you have?",
+			type: "textarea",
+			required: true
+		},
+		{
+			name: "platforms",
+			label: "What kinds of features or updates would you like to test?",
+			type: "textarea",
+			required: true
+		},
+		{
+			name: "availability",
+			label: "How often would you be available to test?",
+			type: "text",
+			required: true,
+			placeholder: "Several hours per week"
+		},
+		{
+			name: "extra",
+			label: "Anything else you'd like us to know?",
+			type: "textarea",
+			required: false
+		}
+	]
+};
+
