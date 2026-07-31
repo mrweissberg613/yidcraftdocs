@@ -53,6 +53,9 @@ export default defineConfig({
 			customCss: [
 				'./src/styles/global.css',
 			],
+			components: {
+				Header: './src/components/CustomHeader.astro',
+			},
 			head: [
 				// Add ICO favicon fallback for Safari.
 				{
@@ -97,12 +100,11 @@ export default defineConfig({
 					href: 'https://www.youtube.com/@YidCraft613'
 
 				}
+				
 
 			],
 
-
 			lastUpdated: true,
-
 
 			sidebar: [
 

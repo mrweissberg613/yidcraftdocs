@@ -31,33 +31,36 @@ export async function sendApplicationDiscordMessage(
 		return;
 	}
 
-	const status = payload.status || "Pending";
+		const status = payload.status || "Pending";
 	const statusColor = status === "Approved" ? 0x22c55e : status === "Denied" ? 0xef4444 : 0x3b82f6;
-	const summaryFields = [
-		{
-			name: "Application ID",
-			value: payload.applicationId
-		},
-		{
-			name: "Type",
-			value: payload.type
-		},
-		{
-			name: "Status",
-			value: status
-		},
-		{
-			name: "Submitted",
-			value: dayjs(payload.submittedAt).format("YYYY-MM-DD HH:mm:ss")
-		}
-	];
+
+	const staffQuestionLabels: Record<string, string> = {
+		age: "How old are you?",
+		timezone: "What timezone or country are you in?",
+		playtime: "How many hours can you play per day/week?",
+		staff_experience: "Staff experience?",
+		moderation_experience: "Moderation experience?",
+		punishment_history: "Punishment history?",
+		spam_scenario: "Spam scenario:",
+		hacker_logs_off: "Hacker logs off:",
+		accused_of_unfairness: "Accused of unfairness:",
+		why_not_abuse_perms: "Why not abuse perms?",
+		why_staff: "Why staff?",
+		why_good_fit: "Why good fit?",
+		improvements: "Improvements?",
+		extra_info: "Extra info:",
+		preferred_role: "Preferred role:"
+	};
 
 	const answerFields = Object.entries(payload.answers)
-		.slice(0, 6)
-		.map(([question, answer]) => ({
-			name: question,
-			value: answer || "No answer provided"
-		}));
+		.filter(([key]) => key !== "minecraft" && key !== "discord")
+		.map(([key, answer]) => {
+			const label = payload.type === "staff" ? staffQuestionLabels[key] || key : key;
+			return {
+				name: label,
+				value: answer || "No answer provided"
+			};
+		});
 
 	try {
 		const response = await fetch(webhookUrl, {
@@ -69,9 +72,9 @@ export async function sendApplicationDiscordMessage(
 				embeds: [
 					{
 						title: `New ${payload.type} Application`,
-						description: `**Minecraft:** ${payload.minecraft}\n**Discord:** ${payload.discord}\n**Status:** ${status}`,
+						description: `**Applicant:** Discord- ${payload.discord} | MC- ${payload.minecraft}\n\n**Status:** ${status}`,
 						color: statusColor,
-						fields: [...summaryFields, ...answerFields],
+						fields: answerFields,
 						timestamp: payload.submittedAt
 					}
 				]

@@ -1,56 +1,42 @@
 ---
-import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import { Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 ---
 
 <StarlightPage
   frontmatter={{
-    title: "Applications",
-    description: "Apply for various positions on YidCraft."
+    title: 'Applications',
+    description: 'Apply for various positions on YidCraft.'
   }}
 >
   <h1>Applications</h1>
 
-  <p>
-    Interested in helping the YidCraft community? Apply below.
-  </p>
+  <p>Interested in helping the YidCraft community? Apply below.</p>
 
-  <div class="applications-grid">
-    <a class="application-card" href="/applications/staff">
-      <h2>🛡 Staff Application</h2>
+  <CardGrid>
+    <Card title="Staff Application" icon="question-circle">
       <p>Apply for staff roles and help support the community.</p>
-    </a>
+      <LinkButton href="/applications/staff" variant="secondary" icon="right-arrow">Apply now</LinkButton>
+    </Card>
 
-    <a class="application-card" href="/applications/partnership-manager">
-      <h2>🤝 Partnership Manager</h2>
+    <Card title="Partnership Manager" icon="star">
       <p>Apply to help grow YidCraft through partnerships and collaborations.</p>
-    </a>
+      <LinkButton href="/applications/partnership-manager" variant="secondary" icon="right-arrow">Apply now</LinkButton>
+    </Card>
 
-    <a class="application-card" href="/applications/media">
-      <h2>📹 Media Application</h2>
+    <Card title="Media Application" icon="pencil">
       <p>Apply to help create content and promote YidCraft.</p>
-    </a>
-  </div>
+      <LinkButton href="/applications/media" variant="secondary" icon="right-arrow">Apply now</LinkButton>
+    </Card>
+  </CardGrid>
 </StarlightPage>
 
 <style>
-.applications-grid {
-  display: grid;
-  gap: 1rem;
-  margin-top: 2rem;
-}
+  :global(.card-grid) {
+    margin-top: 2rem;
+  }
 
-.application-card {
-  display: block;
-  padding: 1.25rem;
-  border: 1px solid var(--sl-color-gray-5);
-  border-radius: 12px;
-  text-decoration: none;
-  color: inherit;
-  transition: 0.2s ease;
-}
-
-.application-card:hover {
-  border-color: var(--sl-color-accent);
-  transform: translateY(-2px);
-}
+  :global(.card) {
+    min-height: 100%;
+  }
 </style>

@@ -1,6 +1,8 @@
 import dayjs from "dayjs";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import { nanoid } from "nanoid";
-import db from "./database";
 
 export interface ApplicationRecord {
 	id: number;
@@ -16,19 +18,47 @@ export interface ApplicationRecord {
 	reviewed_by: string | null;
 }
 
-function parseRow(row: any): ApplicationRecord {
+const isVercelRuntime = Boolean(process.env.VERCEL || process.env.ASTRO_OUTPUT);
+const dataDir = isVercelRuntime
+	? path.join(os.tmpdir(), "yidcraft-data")
+	: path.join(process.cwd(), "data");
+const storeFile = path.join(dataDir, "applications.json");
+
+if (!fs.existsSync(dataDir)) {
+	fs.mkdirSync(dataDir, { recursive: true });
+}
+
+function readApplications(): ApplicationRecord[] {
+	if (!fs.existsSync(storeFile)) {
+		return [];
+	}
+
+	try {
+		const raw = fs.readFileSync(storeFile, "utf8");
+		const parsed = JSON.parse(raw) as ApplicationRecord[];
+		return Array.isArray(parsed) ? parsed : [];
+	} catch {
+		return [];
+	}
+}
+
+function writeApplications(applications: ApplicationRecord[]) {
+	fs.writeFileSync(storeFile, JSON.stringify(applications, null, 2));
+}
+
+function parseRecord(record: ApplicationRecord): ApplicationRecord {
 	return {
-		id: row.id,
-		application_id: row.application_id,
-		type: row.type,
-		minecraft: row.minecraft,
-		discord: row.discord,
-		status: row.status,
-		answers: row.answers ? JSON.parse(row.answers) : {},
-		admin_notes: row.admin_notes || "",
-		submitted_at: row.submitted_at,
-		reviewed_at: row.reviewed_at,
-		reviewed_by: row.reviewed_by
+		id: record.id,
+		application_id: record.application_id,
+		type: record.type,
+		minecraft: record.minecraft,
+		discord: record.discord,
+		status: record.status,
+		answers: record.answers || {},
+		admin_notes: record.admin_notes || "",
+		submitted_at: record.submitted_at,
+		reviewed_at: record.reviewed_at || null,
+		reviewed_by: record.reviewed_by || null
 	};
 }
 
@@ -41,95 +71,68 @@ export function createApplication(input: {
 	applicationId?: string;
 	submittedAt?: string;
 }) {
+	const applications = readApplications();
 	const applicationId = input.applicationId || `APP-${nanoid(8).toUpperCase()}`;
 	const submittedAt = input.submittedAt || dayjs().toISOString();
+	const nextId = applications.reduce((max, item) => Math.max(max, item.id), 0) + 1;
 
-	db.prepare(`
-		INSERT INTO applications (
-			application_id,
-			type,
-			minecraft,
-			discord,
-			status,
-			answers,
-			submitted_at
-		)
-		VALUES (
-			?,
-			?,
-			?,
-			?,
-			?,
-			?,
-			?
-		)
-	`).run(
-		applicationId,
-		input.type,
-		input.minecraft,
-		input.discord,
-		input.status || "Pending",
-		JSON.stringify(input.answers),
-		submittedAt
-	);
+	const record: ApplicationRecord = {
+		id: nextId,
+		application_id: applicationId,
+		type: input.type,
+		minecraft: input.minecraft,
+		discord: input.discord,
+		status: input.status || "Pending",
+		answers: input.answers || {},
+		admin_notes: "",
+		submitted_at: submittedAt,
+		reviewed_at: null,
+		reviewed_by: null
+	};
 
-	return getApplicationByApplicationId(applicationId);
+	applications.push(record);
+	writeApplications(applications);
+
+	return parseRecord(record);
 }
 
 export function getApplicationByApplicationId(applicationId: string) {
-	const row = db.prepare(`
-		SELECT * FROM applications
-		WHERE application_id = ?
-		LIMIT 1
-	`).get(applicationId);
-
-	return row ? parseRow(row) : null;
+	const applications = readApplications();
+	const record = applications.find((item) => item.application_id === applicationId);
+	return record ? parseRecord(record) : null;
 }
 
 export function getApplicationById(id: number | string) {
-	const row = db.prepare(`
-		SELECT * FROM applications
-		WHERE id = ?
-		LIMIT 1
-	`).get(Number(id));
-
-	return row ? parseRow(row) : null;
+	const applications = readApplications();
+	const record = applications.find((item) => item.id === Number(id));
+	return record ? parseRecord(record) : null;
 }
 
 export function listApplications(options: { search?: string; status?: string } = {}) {
-	let query = `
-		SELECT * FROM applications
-		WHERE 1 = 1
-	`;
-	const params: Array<string | number> = [];
+	const applications = readApplications();
+	let filtered = [...applications];
 
 	if (options.search) {
-		const searchValue = `%${options.search}%`;
-		query += `
-			AND (
-				application_id LIKE ?
-				OR type LIKE ?
-				OR minecraft LIKE ?
-				OR discord LIKE ?
-				OR answers LIKE ?
-			)
-		`;
-		params.push(searchValue, searchValue, searchValue, searchValue, searchValue);
+		const searchValue = options.search.toLowerCase();
+		filtered = filtered.filter((item) => {
+			const haystack = [
+				item.application_id,
+				item.type,
+				item.minecraft,
+				item.discord,
+				JSON.stringify(item.answers)
+			].join(" ").toLowerCase();
+			return haystack.includes(searchValue);
+		});
 	}
 
 	if (options.status && options.status !== "All") {
-		query += `
-			AND status = ?
-		`;
-		params.push(options.status);
+		filtered = filtered.filter((item) => item.status === options.status);
 	}
 
-	query += `
-		ORDER BY submitted_at DESC
-	`;
-
-	const rows = db.prepare(query).all(...params);
-	return rows.map(parseRow);
+	return filtered
+		.sort((a, b) => b.submitted_at.localeCompare(a.submitted_at))
+		.map(parseRecord);
 }
 
 export function updateApplication(
@@ -141,50 +144,29 @@ export function updateApplication(
 		reviewed_at?: string;
 	}
 ) {
-	const existing = getApplicationById(id);
-	const fields: string[] = [];
-	const values: Array<string | number> = [];
+	const applications = readApplications();
+	const index = applications.findIndex((item) => item.id === Number(id));
 
-	if (updates.status) {
-		fields.push("status = ?");
-		values.push(updates.status);
+	if (index === -1) {
+		return null;
 	}
 
-	if (updates.admin_notes !== undefined) {
-		fields.push("admin_notes = ?");
-		values.push(updates.admin_notes);
-	}
+	const current = applications[index];
+	applications[index] = {
+		...current,
+		status: updates.status || current.status,
+		admin_notes: updates.admin_notes !== undefined ? updates.admin_notes : current.admin_notes,
+		reviewed_by: updates.reviewed_by !== undefined ? updates.reviewed_by : current.reviewed_by,
+		reviewed_at: updates.reviewed_at !== undefined ? updates.reviewed_at : current.reviewed_at
+	};
 
-	if (updates.reviewed_by !== undefined) {
-		fields.push("reviewed_by = ?");
-		values.push(updates.reviewed_by);
-	}
-
-	if (updates.reviewed_at !== undefined) {
-		fields.push("reviewed_at = ?");
-		values.push(updates.reviewed_at);
-	}
-
-	if (!fields.length) {
-		return getApplicationById(id);
-	}
-
-	values.push(Number(id));
-
-	db.prepare(`
-		UPDATE applications
-		SET ${fields.join(", ")}
-		WHERE id = ?
-	`).run(...values);
-
-	const updated = getApplicationById(id);
-
-	return updated;
+	writeApplications(applications);
+	return parseRecord(applications[index]);
 }
 
 export function deleteApplication(id: number | string) {
-	return db.prepare(`
-		DELETE FROM applications
-		WHERE id = ?
-	`).run(Number(id));
+	const applications = readApplications();
+	const filtered = applications.filter((item) => item.id !== Number(id));
+	writeApplications(filtered);
+	return { deleted: filtered.length !== applications.length };
 }

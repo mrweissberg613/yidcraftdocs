@@ -1,8 +1,12 @@
 import Database from "better-sqlite3";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 
-const dataDir = path.join(process.cwd(), "data");
+const isVercelRuntime = Boolean(process.env.VERCEL || process.env.ASTRO_OUTPUT);
+const dataDir = isVercelRuntime
+	? path.join(os.tmpdir(), "yidcraft-data")
+	: path.join(process.cwd(), "data");
 
 if (!fs.existsSync(dataDir)) {
 	fs.mkdirSync(dataDir, { recursive: true });

@@ -18,79 +18,96 @@ export const staffApplication = {
 			placeholder: "MrWeissberg"
 		},
 		{
-			name: "discord_client_id",
-			label: "Discord Client ID",
+			name: "age",
+			label: "How old are you?",
 			type: "text",
 			required: true,
-			placeholder: "123456789012345678"
-		},
-		{
-			name: "staff_role",
-			label: "Staff Role",
-			type: "select",
-			required: true,
-			options: [
-				{ value: "Admin", label: "Admin" },
-				{ value: "Sr Mod", label: "Sr Mod" },
-				{ value: "Mod", label: "Mod" },
-				{ value: "Helper", label: "Helper" }
-			]
-		},
-		{
-			name: "age",
-			label: "Age",
-			type: "number",
-			required: true,
-			placeholder: "16"
+			placeholder: "22"
 		},
 		{
 			name: "timezone",
-			label: "Timezone",
+			label: "What timezone or country are you in?",
 			type: "text",
 			required: true,
-			placeholder: "PST"
+			placeholder: "USA EST"
 		},
 		{
 			name: "playtime",
-			label: "How long have you played on YidCraft?",
+			label: "How many hours can you play per day/week?",
 			type: "textarea",
 			required: true
 		},
 		{
-			name: "experience",
-			label: "Have you been staff on another server?",
+			name: "staff_experience",
+			label: "Staff experience?",
 			type: "textarea",
 			required: true
 		},
 		{
-			name: "reason",
-			label: "Why do you want to become staff?",
+			name: "moderation_experience",
+			label: "Moderation experience?",
 			type: "textarea",
 			required: true
 		},
 		{
-			name: "strengths",
-			label: "What would make you a good staff member?",
+			name: "punishment_history",
+			label: "Punishment history?",
 			type: "textarea",
 			required: true
 		},
 		{
-			name: "activity",
-			label: "How many hours can you play each week?",
-			type: "text",
-			required: true
-		},
-		{
-			name: "scenario",
-			label: "How would you handle a player breaking the rules?",
+			name: "spam_scenario",
+			label: "Spam scenario:",
 			type: "textarea",
 			required: true
 		},
 		{
-			name: "extra",
-			label: "Anything else you'd like us to know?",
+			name: "hacker_logs_off",
+			label: "Hacker logs off:",
+			type: "textarea",
+			required: true
+		},
+		{
+			name: "accused_of_unfairness",
+			label: "Accused of unfairness:",
+			type: "textarea",
+			required: true
+		},
+		{
+			name: "why_not_abuse_perms",
+			label: "Why not abuse perms?",
+			type: "textarea",
+			required: true
+		},
+		{
+			name: "why_staff",
+			label: "Why staff?",
+			type: "textarea",
+			required: true
+		},
+		{
+			name: "why_good_fit",
+			label: "Why good fit?",
+			type: "textarea",
+			required: true
+		},
+		{
+			name: "improvements",
+			label: "Improvements?",
+			type: "textarea",
+			required: true
+		},
+		{
+			name: "extra_info",
+			label: "Extra info:",
 			type: "textarea",
 			required: false
+		},
+		{
+			name: "preferred_role",
+			label: "Preferred role:",
+			type: "textarea",
+			required: true
 		}
 	]
 };
