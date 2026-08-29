@@ -151,6 +151,8 @@ export default defineConfig({
 
 						{ label: 'Kosher System', slug: 'features/koshersystem' },
 
+						{ label: 'Tzedakah', slug: 'features/tzedakah' },
+
 						{ label: 'Custom Foods', slug: 'features/customfoods' }
 
 					],

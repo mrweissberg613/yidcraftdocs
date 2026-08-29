@@ -1,0 +1,36 @@
+{
+  "title": "YidCraft Wiki",
+  "social": {
+    "discord": "https://discord.gg/22ewYWUQgh",
+    "youtube": "https://www.youtube.com/@YidCraft613"
+  },
+  "applicationsUrl": "https://yidcraft.vercel.app/applications",
+  "groups": [
+    {
+      "label": "Getting Started",
+      "pages": [
+        "guides/intro",
+        "guides/rules",
+        "guides/mods",
+        "guides/how-to-join",
+        "guides/basics",
+        "guides/contribute"
+      ]
+    },
+    {
+      "label": "Features",
+      "pages": [
+        "features/intro",
+        "features/homes",
+        "features/teams",
+        "features/brewing",
+        "features/playermarket",
+        "features/investing",
+        "features/chestshops",
+        "features/koshersystem",
+        "features/tzedakah",
+        "features/customfoods"
+      ]
+    }
+  ]
+}
