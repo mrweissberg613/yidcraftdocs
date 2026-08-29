@@ -29,6 +29,7 @@
         "features/chestshops",
         "features/koshersystem",
         "features/tzedakah",
+        "features/brachot",
         "features/customfoods"
       ]
     }
