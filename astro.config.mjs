@@ -153,6 +153,8 @@ export default defineConfig({
 
 						{ label: 'Tzedakah', slug: 'features/tzedakah' },
 
+						{ label: 'Brachot', slug: 'features/brachot' },
+
 						{ label: 'Custom Foods', slug: 'features/customfoods' }
 
 					],
