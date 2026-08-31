@@ -151,6 +151,10 @@ export default defineConfig({
 
 						{ label: 'Kosher System', slug: 'features/koshersystem' },
 
+						{ label: 'Skills and Sefarim', slug: 'features/skills' },
+
+						{ label: 'Mezuzos', slug: 'features/mezuzos' },
+
 						{ label: 'Tzedakah', slug: 'features/tzedakah' },
 
 						{ label: 'Brachot', slug: 'features/brachot' },

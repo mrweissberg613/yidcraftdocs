@@ -28,6 +28,8 @@
         "features/investing",
         "features/chestshops",
         "features/koshersystem",
+        "features/skills",
+        "features/mezuzos",
         "features/tzedakah",
         "features/brachot",
         "features/customfoods"

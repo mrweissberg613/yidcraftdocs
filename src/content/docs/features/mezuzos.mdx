@@ -1,0 +1,110 @@
+---
+title: Mezuzos
+description: Put up a mezuzah on YidCraft, say the bracha, control who opens your doors, and keep it repaired.
+---
+
+import { Steps } from '@astrojs/starlight/components'
+
+A mezuzah goes on the doorpost of your home. It protects the door, and it earns you Kosher Points over time.
+
+## Putting one up
+
+<Steps>
+
+1. Buy a **Mezuzah** from `/kosher shop` for 150 Kosher Points.
+2. Right-click the doorpost beside your door.
+
+</Steps>
+
+It is placed for you: the correct doorpost, the correct height, tilted the correct way for your minhag. You do not position it by hand.
+
+`/mezuzah minhag <ashkenazi|sephardi>` sets whether yours hang slanted or upright. Ashkenazi mezuzos lean with the top pointing **into** the house.
+
+:::note
+Placing a mezuzah inside spawn protection is blocked on purpose, otherwise you would own a spawn door. Everything else — Tzedakah Boxes, mikvaos, sefarim, Jewish Libraries — works at spawn.
+:::
+
+## Say the bracha
+
+A newly placed mezuzah is **not yet valid**. Type the bracha in normal chat:
+
+```text
+Baruch Ata Hashem Elokeinu Melech Haolam Asher Kidishanu B'mitzvotav V'tzivanu Likbo'a Mezuzah
+```
+
+Spelling does not need to be perfect. `boruch`/`baruch`, `atah`/`ata`, and `bmitzvosav`/`b'mitzvotav` all work, and apostrophes do not matter.
+
+:::caution[One word does have to be right]
+**Elokeinu.** Say the Name itself and the bracha will not be accepted.
+:::
+
+Until you say it, `/mezuzah house` counts the mezuzah as *unfixed*, and it does not count toward your home.
+
+## Who can open your doors
+
+| Who | Gets in |
+|---|---|
+| You | Always |
+| Anyone you `/mezuzah add` | Yes, at **every door in that building** |
+| Your team | Yes, unless you turn it off |
+| Everyone else | No |
+
+`/mezuzah add <player>` covers the whole building at once — let someone in the front door and they can open the bedroom too. `/mezuzah kick <player>` takes it back. `/mezuzah trusted` shows who can open the door you are looking at.
+
+`/mezuzah team <true|false>` decides whether your [teammates](/features/teams/) get in. It also spreads across the building, but a door you set **individually** keeps its own answer, and later changes leave it alone. That is how you make everything open to your team except the vault.
+
+`/mezuzah team follow` puts a door back in step with the rest of the building.
+
+Leaving a team closes their doors to you immediately.
+
+### Redstone does not get around it
+
+A button, lever, or pressure plate counts as the action of whoever used it, and is checked exactly like a hand on the door. An item thrown onto a wooden plate counts as the action of whoever threw it.
+
+A signal nobody can be blamed for — a hopper clock, an observer, a mob wandering onto a plate — is blocked.
+
+## Touching the mezuzah
+
+Sneak + right-click an affixed mezuzah to touch it. Once per cooldown that is a Kosher Point. Clicking repeatedly does nothing extra.
+
+## Wear and repair
+
+Mezuzos wear over time and eventually stop counting. A **Sofer's Quill** restores one, but only in the hands of someone who has studied **[Hilchos Stam](/features/skills/)**.
+
+A sofer can repair other players' mezuzos, which is the service that skill exists to create.
+
+## Checking your home
+
+`/mezuzah house` scans the enclosed building you are standing in and reports required doorways, valid mezuzos, unfixed ones, and your completion.
+
+## Removing one
+
+Look directly at it and run `/mezuzah remove`. Owner or staff only.
+
+## Command list
+
+| Command | What it does |
+|---|---|
+| `/mezuzah` | Mezuzah command list |
+| `/mezuzah add <player>` | Let someone into your whole home |
+| `/mezuzah kick <player>` | Take that access back |
+| `/mezuzah trusted` | Who can open the door you are looking at |
+| `/mezuzah team <true\|false>` | Let your team in, or not |
+| `/mezuzah team follow` | Put a door back in step with the building |
+| `/mezuzah minhag <ashkenazi\|sephardi>` | Slanted or upright |
+| `/mezuzah house` | Scan your home for missing mezuzos |
+| `/mezuzah remove` | Remove the mezuzah you are looking at |
+
+## Common questions
+
+### My mezuzah does not count.
+
+You probably have not said the bracha. `/mezuzah house` lists unfixed mezuzos separately.
+
+### The mezuzah leans the wrong way.
+
+Check `/mezuzah minhag`. If that is right and it still leans wrong, tell staff — it is a one-line server setting, not something you can fix.
+
+### My teammate cannot open my door.
+
+Check `/mezuzah team` at that door. A door set individually ignores building-wide changes.

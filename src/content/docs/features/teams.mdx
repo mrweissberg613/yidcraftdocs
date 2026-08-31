@@ -7,6 +7,8 @@ import { Steps, Aside } from '@astrojs/starlight/components';
 
 Teams let players group together to build, play, and progress together. Share a team, manage a home base, communicate privately, and work toward common goals as a unit.
 
+Teammates also share each other's doors, unless the door owner turns that off. See [Mezuzos](/features/mezuzos/#who-can-open-your-doors).
+
 Your current team is displayed on the **scoreboard**.
 
 ---
@@ -23,7 +25,7 @@ Your current team is displayed on the **scoreboard**.
    /team create <name>
    ```
 
-   > Creating a team costs **250 coins**. A confirmation prompt will appear before the payment is taken.
+   > Creating a team costs **250 Shekels**. A confirmation prompt will appear before the payment is taken.
 
    To join an existing team, you must receive and accept an invite from a team owner:
 
@@ -41,6 +43,8 @@ Your current team is displayed on the **scoreboard**.
    ```
 
    > **Note:** Team owners cannot leave their team until they transfer ownership or disband the team.
+
+   Leaving a team closes their doors to you immediately.
 
 3. **View Team Information**
 
@@ -67,7 +71,7 @@ Your current team is displayed on the **scoreboard**.
 
 | Command | Description |
 |---|---|
-| `/team create <name>` | Create a new team (costs 250 coins) |
+| `/team create <name>` | Create a new team (costs 250 Shekels) |
 | `/team invite <player>` | Invite a player to your team |
 | `/team accept` | Accept a pending team invite |
 | `/team deny` | Deny a pending team invite |
@@ -195,7 +199,7 @@ To permanently delete your team:
 <Aside type="danger">
 This permanently deletes your team. All members are removed, the team home is cleared, and pending invites are cancelled.
 
-The 250 coin creation cost will not be refunded.
+The 250 Shekel creation cost will not be refunded.
 </Aside>
 
 A confirmation prompt will appear before the team is deleted.

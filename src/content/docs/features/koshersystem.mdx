@@ -1,11 +1,11 @@
 ---
 title: Kosher System
-description: Keep kosher on YidCraft with shechita, tevilah, Bishul, Modeh Ani, and Kosher Points.
+description: Keep kosher on YidCraft with shechita, tevilah, Bishul, and Kosher Points.
 ---
 
 import { Steps } from '@astrojs/starlight/components'
 
-Run `/kosher keep` to join the Kosher Challenge. From then on, kosher food earns **Kosher Points**, properly prepared meat pays the most, and forbidden food costs you a chance.
+Run `/kosher keep` to join the Kosher Challenge. From then on, kosher food earns **Kosher Points**, properly prepared meat pays the most, and forbidden food costs you points, health, and a chance.
 
 ## Quick start
 
@@ -18,23 +18,36 @@ Run `/kosher keep` to join the Kosher Challenge. From then on, kosher food earns
 `/kosher` lists the commands. `/kosher status` shows your points, chances, and fleishig timer. Use `/kosher points` for your point total, `/kosher shop` to spend points, and `/kosher notifications` to mute or unmute point messages.
 :::
 
+You do not need to find anything first. **Hilchos Shechita** and **Sefer Brachos** are given to you on your first login, so the knife and the mezuzah bracha work right away. See [Skills and Sefarim](/features/skills/) for the rest.
+
 ## The Kosher Challenge
 
 The system only applies after you run `/kosher keep`. Once you have joined:
 
 - Kosher food earns Kosher Points.
-- Food prepared the wrong way earns nothing, but there is no punishment.
-- Inherently forbidden food costs one chance.
+- Food prepared the wrong way earns nothing, but costs nothing.
+- Inherently forbidden food costs points, health, and one chance.
 
-You start with a small number of chances. Losing all of them resets the challenge and starts a cooldown before you can join again. Check `/kosher status` whenever you need the current count.
+You start with **3 chances**. Losing all of them resets your Kosher Points and starts a cooldown before you can join again. Check `/kosher status` whenever you need the current count.
+
+### Penalties
+
+| What you did | Kosher Points | Damage |
+|---|---:|---|
+| Ate something non-kosher | −10 | 2 hearts |
+| Ate dairy while still fleishig | −5 | 1 heart |
+
+The damage **ignores armour**. Diamond gear is not a defence against what you ate.
+
+You never lose more points than you actually have, so your total cannot go below zero. Eating dairy early costs points and health, but it does not use up a chance.
 
 ### Always forbidden
 
-Pork, rabbit, rotten flesh, spider eyes, pufferfish, and tropical fish cost a chance. Preparation cannot make them kosher.
+Pig, rabbit, horse, rotten flesh, spider eyes, and anything from the water without fins and scales — pufferfish and tropical fish included. No preparation makes these kosher.
 
 ### Fine as they are
 
-Bread, fruit, vegetables, eggs, dairy, cod, and salmon need no special preparation. Fish do not require slaughter, so cooked cod and salmon count as kosher straight out of the water.
+Bread, fruit, vegetables, eggs, dairy, cod, and salmon need no special preparation. Fish are not slaughtered, so cooked cod and salmon count as kosher straight out of the water.
 
 ### Meat takes work
 
@@ -42,38 +55,52 @@ Beef, mutton, and chicken only earn points when the animal was shechted. Meat fr
 
 ## Shechita and the Shechita Knife
 
-Craft a **Shechita Knife** in a 3x3 crafting grid. Put an iron sword, wheat, and bone vertically in the middle column.
+You need **Hilchos Shechita**, which you already have, and a **Shechita Knife**. Craft it in a 3x3 crafting grid: iron sword, wheat, and bone vertically in the middle column.
 
 <img src="/assets/kniferecipe.png" alt="Crafting recipe for the Shechita Knife" width="400" height="400" />
 
 Hold the knife in your main hand and use it to kill a cow, mooshroom, sheep, goat, or chicken. Pigs and rabbits never work, and the knife will tell you why. Leather, wool, feathers, bones, and Looting drops still work normally.
 
+### One clean cut
+
+Shechita is a single uninterrupted stroke, so the knife **kills any animal in one hit**. No hacking an animal down over five swings.
+
+This works on animals only. Against a zombie or another player the knife does exactly what an iron sword does. It is a slaughter tool, not a better weapon.
+
+### The rules
+
+- Kill with the knife in your **main hand**
+- The animal must be a kosher species
+- The knife should be **toiveled**, or the meat is marked and earns nothing
+
+A Shechita Knife cannot make a non-kosher species kosher. Killing a pig with it just kills a pig.
+
 The dropped meat carries hidden kosher data. Renaming it does not change that data, and cooking it in a furnace keeps the kosher status. Raw meat is worth nothing, so cook it before eating unless your knife has Bishul.
+
+### Advanced Shechita
+
+If you have found and studied the **Advanced Shechita** sefer, a proper shechita yields **double the meat**. It multiplies what the animal already dropped, so Looting still matters and a chicken is still worth less than a cow. See [Skills and Sefarim](/features/skills/) for where that sefer is found.
 
 ## Tevilah at the mikveh
 
-New knives and cooking tools need **tevilah**, which means immersion in a mikveh. An undipped knife still produces meat with kosher data, but the meat earns no points.
+New metal utensils need **tevilah**, which means immersion in a mikveh. An undipped knife still produces meat with kosher data, but the meat earns no points.
 
-<img src="/assets/mikveh.png" alt="The temporary mikveh at YidCraft spawn" width="700" />
-
-:::note[Temporary mikveh]
-The sign at the current spawn pool says that no bracha is needed. Follow staff instructions if the setup changes.
-:::
+<img src="/assets/mikveh.png" alt="The mikveh at YidCraft spawn" width="700" />
 
 ### How to toivel an item
 
 <Steps>
 
-1. Go to spawn and find the small mikveh pool.
+1. Go to spawn and find the mikveh pool.
 2. Hold the item in your main hand.
-3. Stand inside the water.
+3. Stand **inside** the water.
 4. Left-click, right-click, or sneak. Any of the three works.
 
 </Steps>
 
 Particles, a sound, and a chat message confirm that it worked. The item's lore will change to `Tevilah: Toiveled`.
 
-If you stand beside the water, the plugin tells you to step in. Players cannot place blocks inside the mikveh, so the pool cannot be drained by accident.
+You are always told what happened. If you stand beside the water, the plugin tells you to step in, and `/mikveh here` reports exactly what the plugin sees where you are standing. Players cannot place blocks inside the mikveh, so the pool cannot be drained by accident.
 
 ### Items that need tevilah
 
@@ -91,6 +118,23 @@ Tevilah: Needs tevilah     <- take it to the mikveh
 Tevilah: Toiveled          <- ready to use
 ```
 
+### Building your own mikveh
+
+With **Hilchos Mikvaos** you can build a mikveh yourself and offer it to other players.
+
+<Steps>
+
+1. Buy a **Mikveh Wand** from `/kosher shop`. Anyone may buy it.
+2. Dig and fill your pool.
+3. Left-click one corner, then right-click the opposite corner.
+4. Run `/mikveh create <name>`.
+
+</Steps>
+
+Buying the wand and knowing how to use it are separate things. Without the skill the wand will not mark anything, and it tells you why.
+
+You can remove a mikveh you built. You cannot remove anyone else's, including the public one at spawn.
+
 ## Bishul
 
 **Bishul** is a special enchantment for the Shechita Knife. Combine a Bishul book with the knife in an anvil. The anvil costs XP levels.
@@ -99,22 +143,32 @@ Tevilah: Toiveled          <- ready to use
 
 A knife with Bishul drops meat already cooked. The kosher marking carries over, so the result is the same as slaughtering the animal and then smelting the raw meat. You can eat the drop right away and earn the normal cooked-meat points.
 
+It is a cooking enchantment, not a kashrus one. Non-kosher meat stays non-kosher, just cooked.
+
 The item lore can show `Bishul I` together with `Tevilah: Toiveled`. Bishul only works on a Shechita Knife. It cannot be moved onto an ordinary sword, and a grindstone will not remove it. Ask staff how to get a Bishul book.
 
 ## Fleishig and milchig
 
-Eating meat or poultry makes you **fleishig**. Dairy eaten during the waiting period earns no points, but it does not cost a chance. Wait for the timer to finish or eat something pareve.
+Eating meat or poultry makes you **fleishig**. Dairy is off the table until the clock runs out, and eating it early costs **5 Kosher Points and a heart**. Wait for the timer to finish or eat something pareve.
 
 `/kosher status` shows the time left:
 
 ```text
-Status: Fleishig - dairy earns no points for 14m
+Status: Fleishig - dairy costs points for 14m
 Status: Pareve - you may eat dairy
 ```
 
+### Milk does not rescue you
+
+Milk normally clears every potion effect, the universal cure. Drink it while you are still fleishig and **the bucket empties but the effects come straight back**. You drank it, it did nothing, and you are told why.
+
+Modeh Ani earns Kosher Points too. It has its own page: [Brachot](/features/brachot/).
+
 ## Kosher Points and rewards
 
-Food and Modeh Ani both award points. These are the usual food values:
+Points come from eating properly prepared kosher food, from having a valid [mezuzah](/features/mezuzos/), from touching a mezuzah, and from [Modeh Ani](/features/brachot/).
+
+These are the usual food values:
 
 | Food | Points |
 |---|---:|
@@ -129,7 +183,7 @@ Properly shechted meat is the fastest earner. Apples will not get you very far.
 
 ### Milestones
 
-Each milestone gives a one-time Shekel payment.
+Each milestone gives a one-time Shekel payment. `/kosher status` shows your progress.
 
 | Points | Title | Reward |
 |---:|---|---:|
@@ -141,7 +195,18 @@ Each milestone gives a one-time Shekel payment.
 
 ### The kosher shop
 
-Run `/kosher shop` to spend points. The current exchange is **250 Kosher Points for 500 Shekels**. More rewards may be added later.
+Run `/kosher shop` to spend Kosher Points.
+
+| Item | Cost |
+|---|---:|
+| 250 Shekels | 500 |
+| Shechita Knife | 200 |
+| Mezuzah | 150 |
+| Jewish Library | 300 |
+| Mikveh Wand | 400 |
+| Sofer's Quill | 500 |
+
+Items that need a skill are still sold to everyone. The menu tells you whether you have learned the halachos yet and lets you buy it either way, so you can gift, trade, or stockpile freely.
 
 ## Tzedakah and custom foods
 
@@ -163,9 +228,17 @@ The animal was not shechted. Kill it with a Shechita Knife, and make sure the kn
 
 Cooking vessels need dipping too. Take the furnace to the mikveh at spawn, stand in the water, and click while holding it.
 
-### Why did dairy give me nothing?
+### Why did dairy cost me points and a heart?
 
-You are probably still fleishig. Run `/kosher status` to see the timer.
+You were still fleishig. Run `/kosher status` to see the timer.
+
+### Does anything work inside spawn protection?
+
+Yes. Tzedakah Boxes, mikvaos, sefarim, and Jewish Libraries all work inside spawn protection. Placing a **mezuzah** at spawn is still blocked on purpose, otherwise you would own a spawn door.
+
+### Why does the GUI look like a plain chest?
+
+You have not accepted the server resource pack.
 
 ### Can I turn off the point messages?
 
