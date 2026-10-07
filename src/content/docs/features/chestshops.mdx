@@ -1,77 +1,108 @@
 ---
-title: Chest Shops
-description: Learn how to create and use chest shops.
+title: Player Shops
+description: Buy an NPC-run shop, stock it, set prices, post buy orders, and trade while you are offline.
 ---
 
-# Creating a Player Shop
+Player shops no longer use chests and four-line signs. Each one has a **shop keeper NPC** and a set of menus. Right click the keeper to shop, or, if the shop is yours, to open its back office. The keeper keeps trading while the owner is offline.
 
-Chest Shops allow players to buy and sell items directly from a chest.
+## Buying a shop
 
-## Step 1: Place a Chest
+An empty shop has **BUY THIS SHOP** over its keeper and **Available Shop** underneath. Right click the keeper to see the price and what comes with it, then choose **Buy** and confirm.
 
-Place a chest where you want your shop to be located.
+Once it is yours:
 
-## Step 2: Place a Sign
-
-Place a sign exactly **one block away** from the chest (for example, directly above it).
-
-Write the following format on the sign:
-
-![Chest Shop Format](/assets/chestshopformat.png)
-
-### Sign Format
-
-**Line 1**
-- Leave this line blank.
-- The plugin will automatically fill it with your username.
-- Players with the `ChestShop.admin` permission can create shops under other players' names.
-
-**Line 2**
-- Enter the quantity of items being bought or sold.
-
-**Line 3**
-- Enter the buy and/or sell price.
-- Use:
-  - `B` = Price players pay to **buy** items.
-  - `S` = Price players receive when they **sell** items.
-- Separate buy and sell prices with a colon (`:`).
-
-Examples:
-
-```text
-B 5:5 S
-B 5
-S free
-B 10:5 S
-```
-
-**Line 4**
-- Enter the item name or ID.
-- You can also place a `?` on this line and the plugin will automatically detect the item from the chest.
-- Alternatively, click the sign while holding the desired item.
-- Use `/iteminfo` to view the correct item name for the item you're holding.
-
-## Example Shop
-
-![Example Chest Shop](/assets/chestsshopexample.png)
-
-### What This Shop Does
-
-In the example above:
-
-- Players can **buy 64 diamonds** for **$10**.
-- Players can **sell 64 diamonds** back for **$5**.
-- The shop owner is **Phoenix616**.
-
-## Tips
-
-:::tip
-Make sure the chest contains enough stock before opening your shop to other players.
-:::
+- The keeper wears your Minecraft skin and shows your shop's name.
+- Right clicking it opens your back office instead of the customer menu.
+- You can own one player shop at a time.
 
 :::note
-If a shop is out of stock, players will not be able to purchase items from it.
+Buying a shop gives you the shop keeper and its trading menus. It does not give you building rights to the land around it.
 :::
 
+## Shopping at someone else's shop
 
+Right click an owned shop keeper. The shop front has **Buy**, **Sell**, **About** and **Goodbye**.
 
+### Buying
+
+Choose **Buy** to see what is on the shelves.
+
+- **Left click** an item to buy one.
+- **Shift click** to buy up to one full stack.
+- The item shows its price and how many are in stock.
+
+Your payment goes into the owner's shop earnings. If the owner is offline, the trade still works and the money waits for them.
+
+### Selling
+
+Choose **Sell** to see the shop's buy orders: the items its owner wants, what each one pays, and how many are still needed.
+
+- **Left click** to sell one.
+- **Shift click** to sell as many as the order still needs.
+
+Only the exact item shown counts. Its name, enchantments and custom data must match, so a renamed stick is not a Shechita Knife.
+
+## Running your shop
+
+Right click your own keeper to open the **back office**.
+
+### Stock and prices
+
+Choose **Stock and prices**. Click a stack in your own inventory to put that whole stack on the shelf. The exact item is kept, including its name, enchantments and custom data.
+
+For an item already in stock:
+
+- **Left click** to take up to a stack back.
+- **Right click** to set its price per item.
+- **Shift and right click** to put it on sale or take it off sale.
+
+Adding stock does not automatically list it. Set a price, then make sure it says **On sale**.
+
+### Buy orders
+
+A buy order lets other players sell an exact item to your shop, even while you are away.
+
+1. Open **Money** and deposit some Shekels into **shop funds**.
+2. Open **Buy orders** and click an example of the item in your inventory. The example is not taken.
+3. Choose how much to pay for each one and how many you want.
+4. Confirm the order.
+
+The full cost is set aside from your shop funds immediately. That guarantees every seller can be paid. Items bought by the order go into your stock. Click an open order to cancel it; unused money returns to shop funds, and anything already bought stays in stock.
+
+### Money
+
+The **Money** screen keeps three amounts separate:
+
+| Money | What it is for |
+|---|---|
+| **Shop funds** | Money you deposit to pay for buy orders |
+| **Set aside for orders** | Funds already promised to players who fill your orders |
+| **Earnings** | Money customers paid when they bought from your shelves |
+
+You can withdraw any shop funds that are not set aside, and collect your earnings whenever you like.
+
+### The rest of the back office
+
+- **History** shows the last 45 sales, purchases, deposits and withdrawals.
+- **Rename** gives the shop a name up to 24 characters. Type the name in chat, or type `cancel` to keep the old one.
+- **See it as a customer** opens the same shop front everyone else sees.
+- **Refresh my skin** updates the keeper if you changed your Minecraft skin.
+
+## Selling your shop
+
+A shop can be resold only for **twice its original price**. That resale price never changes, no matter how many times the shop changes hands.
+
+Before listing it, you must:
+
+- take out all stock;
+- cancel every buy order;
+- withdraw all shop funds; and
+- collect all earnings.
+
+The back office tells you what is still left if the shop is not empty. Once it is ready, choose **Sell this shop** and confirm. The keeper changes back to **BUY THIS SHOP**, but the shop remains yours until another player buys it. You can cancel the listing at any time before that.
+
+When it sells, the buyer pays you directly, even if you are offline. The new owner gets the shop, its keeper changes to their skin, and your access ends.
+
+:::tip
+There are no player-shop commands to learn. Owners and customers do everything by right clicking the shop keeper and using its menus.
+:::

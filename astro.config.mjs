@@ -153,7 +153,7 @@ export default defineConfig({
 
 						{ label: 'Investing', slug: 'features/investing' },
 
-						{ label: 'Chest Shops', slug: 'features/chestshops' },
+						{ label: 'Player Shops', slug: 'features/chestshops' },
 
 						{ label: 'Kosher System', slug: 'features/koshersystem' },
 
