@@ -116,13 +116,17 @@ export default defineConfig({
 
 						{ label: 'Intro', slug: 'guides/intro' },
 
+						{ label: "What's New", slug: 'guides/whats-new' },
+
 						{ label: 'Rules', slug: 'guides/rules' },
 
 						{ label: 'Allowed Mods', slug: 'guides/mods' },
 
 						{ label: 'How to join', slug: 'guides/how-to-join' },
 
-						{ label: 'Basics', slug: 'guides/basics' }
+						{ label: 'Basics', slug: 'guides/basics' },
+
+						{ label: 'The Tutorial', slug: 'guides/tutorial' }
 
 					],
 
@@ -136,6 +140,8 @@ export default defineConfig({
 					items: [
 
 						{ label: 'Intro', slug: 'features/intro' },
+
+						{ label: 'The Town', slug: 'features/town' },
 
 						{ label: 'Homes', slug: 'features/homes' },
 
@@ -159,7 +165,11 @@ export default defineConfig({
 
 						{ label: 'Brachot', slug: 'features/brachot' },
 
-						{ label: 'Custom Foods', slug: 'features/customfoods' }
+						{ label: 'Custom Foods', slug: 'features/customfoods' },
+
+						{ label: 'Boss Hunting', slug: 'features/bosses' },
+
+						{ label: 'Pets', slug: 'features/pets' }
 
 					],
 

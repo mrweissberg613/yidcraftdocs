@@ -10,10 +10,12 @@
       "label": "Getting Started",
       "pages": [
         "guides/intro",
+        "guides/whats-new",
         "guides/rules",
         "guides/mods",
         "guides/how-to-join",
         "guides/basics",
+        "guides/tutorial",
         "guides/contribute"
       ]
     },
@@ -21,6 +23,7 @@
       "label": "Features",
       "pages": [
         "features/intro",
+        "features/town",
         "features/homes",
         "features/teams",
         "features/brewing",
@@ -32,7 +35,9 @@
         "features/mezuzos",
         "features/tzedakah",
         "features/brachot",
-        "features/customfoods"
+        "features/customfoods",
+        "features/bosses",
+        "features/pets"
       ]
     }
   ]
