@@ -124,6 +124,8 @@ export default defineConfig({
 
 						{ label: 'How to join', slug: 'guides/how-to-join' },
 
+						{ label: 'Playing on Bedrock', slug: 'guides/bedrock' },
+
 						{ label: 'Basics', slug: 'guides/basics' },
 
 						{ label: 'The Tutorial', slug: 'guides/tutorial' }
