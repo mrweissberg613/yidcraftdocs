@@ -151,8 +151,6 @@ export default defineConfig({
 
 						{ label: 'Brewing', slug: 'features/brewing' },
 						
-						{ label: 'Player Market', slug: 'features/playermarket' },
-
 						{ label: 'Investing', slug: 'features/investing' },
 
 						{ label: 'Player Shops', slug: 'features/chestshops' },
