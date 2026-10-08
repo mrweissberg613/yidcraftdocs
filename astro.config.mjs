@@ -165,6 +165,14 @@ export default defineConfig({
 
 						{ label: 'Brachot', slug: 'features/brachot' },
 
+						{ label: 'Tefillin, Tzitzis and Mivtzoim', slug: 'features/mitzvos' },
+
+						{ label: 'Kippah, Hats, Tichel and Sheitel', slug: 'features/headwear' },
+
+						{ label: 'Chitas Pass', slug: 'features/chitas' },
+
+						{ label: 'Trivia and Achievements', slug: 'features/achievements' },
+
 						{ label: 'Custom Foods', slug: 'features/customfoods' },
 
 						{ label: 'Boss Hunting', slug: 'features/bosses' },

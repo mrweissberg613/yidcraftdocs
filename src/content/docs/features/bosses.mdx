@@ -12,7 +12,7 @@ Some of the town's old stories never ended. Six legendary creatures wait in thei
 1. **Find Reb Yehoshua.** He stands on the town square, by the fountain at spawn.
 2. **Talk to him** and choose **Hunt bosses**. A menu of heads opens. A boss you have beaten shows its head, stacked to how many times you won. One you have not beaten shows a black head with its name.
 3. **Pick a boss.** He tells you its story, gives you the quest, and tells you which way its arena lies and roughly where.
-4. **Make the journey.** The arenas are far apart and far from town, so pack food and a bed. Your quest in the sidebar points the way the whole time.
+4. **Make the journey.** The arenas are far apart and far from town, so pack food and a bed. The **Boss Hunt** bar at the top of the screen points the way. It shows when your quest moves on and when you get near the boss you are hunting, and stays out of the way the rest of the time. `/bosses bar` turns it off or back on.
 5. **Find its three clues** in or around the arena.
 6. **Bring them back.** He gives you the item that wakes the boss.
 7. **Wake it and fight.** Each boss wakes in its own way (below).
@@ -126,9 +126,19 @@ Every boss grows with the party, up to 8 players: more health, harder hits, more
 
 ## Loot and Marks
 
-Loot is **yours**: every player who fought rolls for themselves and it goes straight into your inventory. Nothing drops on the floor for someone else to grab.
+Loot is **yours**. Nothing drops on the floor for someone else to grab.
 
-| Boss | Every win | Your first win |
+Everyone who fought gets the win: the quest, the kill count and the Mark. The spoils go to everyone who did their part of the fighting, at least **4% of all the damage** to the boss. Standing at the back and watching does not count.
+
+## Crates
+
+Your spoils come in a **Crate of** that boss, straight into your inventory. **Right click it** to open it. The crate appears in front of you, rattles, hops, and its lid swings open with a light inside. Then everything in it rises out, one by one, and lands in your inventory.
+
+Each crate is rolled for you alone, so two players beating the same boss get different things. Something rare inside (a boss pet) gets a burst of gold and a title.
+
+The [Chitas Pass](/features/chitas/) has its own crate too.
+
+| Boss | In its crate | Your first win, as well |
 |---|---|---|
 | False Scholar | Often a sefer you have **not learned yet**, Ink of Truth, books, XP | Another new sefer, the **Mark of the Humble Scholar**, the Candle of Humility recipe |
 | Golem | Golem Clay, sometimes a Fragment of the Shem, XP | A Fragment of the Shem, the **Mark of the Golem's Rest**, The Rav's Last Instruction recipe |
@@ -141,7 +151,33 @@ Your first win also teaches you the recipe for the boss's waking item, so you ca
 
 The very first player on the server to beat each boss is announced to everyone, and remembered in the Boss Journal.
 
-Each boss also has a tiny version of itself as a pet. About once in a thousand wins it follows somebody home. See [Pets](/features/pets/).
+Each boss also has a tiny version of itself as a pet. About once in a thousand crates, it is waiting inside. See [Pets](/features/pets/).
+
+## Crafting with the spoils
+
+The drops are worth keeping. Each makes something useful at a crafting table.
+
+**Clay Guardian**: a Fragment of the Shem and four Golem Clay. Right click the ground and an iron golem rises there to guard the place.
+
+<img src="/recipes/clay_guardian.png" alt="Clay Guardian: a Fragment of the Shem in the middle of four Golem Clay" width="460" />
+
+**Behemoth's Fodder**: a Horn Shaving and four bone meal make four. Right click a crop and everything growing around it grows at once.
+
+<img src="/recipes/behemoth_fodder.png" alt="Behemoth's Fodder: a Horn Shaving and four bone meal" width="460" />
+
+**Og's Iron Shield**: a Splinter of the Iron Bed and planks, shaped like a shield. Lasts three times as long as a shield.
+
+<img src="/recipes/og_shield.png" alt="Og's Iron Shield: planks with a Splinter of the Iron Bed on top" width="460" />
+
+**Ziz Feather Boots**: two Ziz Feathers over two leather. Falls hurt less.
+
+<img src="/recipes/ziz_boots.png" alt="Ziz Feather Boots: two Ziz Feathers over two leather" width="460" />
+
+**Leviathan Scale Helmet**: five Leviathan Scales in a helmet shape. Your breath lasts longer under water.
+
+<img src="/recipes/leviathan_helmet.png" alt="Leviathan Scale Helmet: five Leviathan Scales" width="460" />
+
+**A copy of a sefer**: with Ink of Truth from the False Scholar. See [Copying a sefer](/features/skills/#copying-a-sefer).
 
 ## The Boss Journal
 
@@ -155,6 +191,7 @@ Each boss also has a tiny version of itself as a pet. About once in a thousand w
 |---|---|
 | `/bosses` | Opens the Boss Journal |
 | `/bosses story on` / `off` | Lets stories start on their own, or stops them |
+| `/bosses bar` | Turns the Boss Hunt bar off, or back on |
 
 ## Who built the arenas
 

@@ -35,6 +35,10 @@
         "features/mezuzos",
         "features/tzedakah",
         "features/brachot",
+        "features/mitzvos",
+        "features/headwear",
+        "features/chitas",
+        "features/achievements",
         "features/customfoods",
         "features/bosses",
         "features/pets"
