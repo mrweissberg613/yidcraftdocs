@@ -123,7 +123,7 @@ export default defineConfig({
 						{ label: 'Allowed Mods', slug: 'guides/mods' },
 
 						{ label: 'How to join', slug: 'guides/how-to-join' },
-						{ label: 'Limbo: your first join', slug: 'guides/limbo' },
+						{ label: 'Discord Linking', slug: 'guides/discord-linking' },
 
 						{ label: 'Playing on Bedrock', slug: 'guides/bedrock' },
 
