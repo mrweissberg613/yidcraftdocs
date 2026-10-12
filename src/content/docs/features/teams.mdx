@@ -78,6 +78,9 @@ Your current team is displayed on the **scoreboard**.
 | `/team leave` | Leave your current team |
 | `/team members` | List all team members and online status |
 | `/team info` | View your team's information |
+| `/team mark <player>` | Show which way a teammate is, for one minute |
+| `/team mark off` | Stop showing them |
+| `/team glow` | Make your teammates glow through walls, for you only |
 | `/team help` | Show available team commands |
 
 ---
@@ -105,6 +108,34 @@ When enabled, your messages will only be visible to your team:
 ```
 
 When disabled, messages will appear in normal public chat.
+
+---
+
+## Finding your teammates
+
+Two commands help you find each other. They only work on members of your own team, and only you see what they show.
+
+### Mark a teammate
+
+```bash
+/team mark <player>
+```
+
+For one minute your action bar shows that teammate's name, an arrow pointing the way to turn, and how many blocks away they are. A ▲ or ▼ with a number means they are that many blocks above or below you. A small column of light also shows over their head, for you only.
+
+`/team mark off` stops it early. The mark also ends if either of you leaves the team or logs off. If they are in another world, such as the Nether, the action bar says so.
+
+### Make your team glow
+
+```bash
+/team glow
+```
+
+Every teammate in your world glows through walls for **10 seconds**, the same outline the Golem's letter stones have. Only you see it. You can use it once every 30 seconds.
+
+<Aside type="note">
+Bedrock has no glowing outline, so on Bedrock use `/team mark` instead.
+</Aside>
 
 ---
 
