@@ -17,7 +17,9 @@ export default defineConfig({
 
 		}
 	},
-	site: 'https://yidcraft.vercel.app',
+	site: 'https://jewishgaming.net',
+  	base: '/yidcraft/wiki',
+
 
 	integrations: [
 		react(),
