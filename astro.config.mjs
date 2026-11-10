@@ -129,7 +129,11 @@ export default defineConfig({
 
 						{ label: 'Basics', slug: 'guides/basics' },
 
-						{ label: 'The Tutorial', slug: 'guides/tutorial' }
+						{ label: 'The Tutorial', slug: 'guides/tutorial' },
+
+						{ label: 'The Crafting Guide', slug: 'guides/crafting' }
+
+
 
 					],
 

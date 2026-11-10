@@ -1,0 +1,18 @@
+---
+title: Stick Recipe
+---
+import CraftingTable from "../../../components/CraftingTable.jsx";
+
+<CraftingTable
+  client:load
+  grid={[
+    null, null, null,
+    { id: "oak_planks" }, null, null,
+    { id: "oak_planks" }, null, null,
+  ]}
+  result={{ id: "stick", count: 4 }}
+  items={{
+    oak_planks: { name: "Oak Planks", lore: "Crafted from logs" },
+    stick: { name: "Stick" },
+  }}
+/>
