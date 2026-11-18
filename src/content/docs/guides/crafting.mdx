@@ -1,21 +1,55 @@
 ---
-title: Stick Recipe
-description: How to craft sticks from planks.
+title: Custom Tools
+description: The Drill and Diamond Drill, and how to craft them.
 ---
 
 import CraftingTable from "../../../components/CraftingTable.jsx";
 
+## Drill
+
 <CraftingTable
   grid={[
-    null, { id: "oak_planks" }, null,
-    null, { id: "oak_planks" }, null,
-    null, null, null,
+    { id: "iron_ingot" }, { id: "iron_pickaxe" }, { id: "iron_ingot" },
+    { id: "iron_ingot" }, { id: "redstone" },     { id: "iron_ingot" },
+    null,                 { id: "iron_ingot" },   null,
   ]}
-  result={{ id: "stick", count: 4 }}
+  result={{ id: "drill" }}
   items={{
-    oak_planks: { name: "Oak Planks", lore: "Any wood planks work" },
-    stick: { name: "Stick" },
+    iron_ingot: { name: "Iron Ingot" },
+    iron_pickaxe: { name: "Iron Pickaxe" },
+    redstone: { name: "Redstone Dust" },
+    drill: {
+      name: "Drill",
+      lore: ["⛏ Ability", "Mines 3 blocks at once."],
+    },
   }}
 />
 
-Place **2 planks**, one directly above the other, in a crafting grid to get **4 sticks**. Any type of wood planks works, and the recipe fits in the 2×2 grid in your inventory, so you do not need a crafting table. Hover over or tap an item to see its name.
+The **Drill** is a stone pickaxe with **512 durability**. When you break a block, it also breaks the **2 blocks behind it** in a straight line, so you mine 3 blocks at once.
+
+## Diamond Drill
+
+<CraftingTable
+  grid={[
+    { id: "diamond" }, { id: "drill" },          { id: "diamond" },
+    { id: "diamond" }, { id: "redstone_block" }, { id: "diamond" },
+    null,              { id: "diamond_block" },  null,
+  ]}
+  result={{ id: "drilldiamond" }}
+  items={{
+    diamond: { name: "Diamond" },
+    drill: {
+      name: "Drill",
+      lore: ["⛏ Ability", "Mines 3 blocks at once."],
+    },
+    redstone_block: { name: "Block of Redstone" },
+    diamond_block: { name: "Block of Diamond" },
+    drilldiamond: {
+      name: "Diamond Drill",
+      texture: "drill",
+      lore: ["⛏ Ability", "Mines a 3x3 area."],
+    },
+  }}
+/>
+
+The **Diamond Drill** is an upgrade of the Drill with **1024 durability**. It mines a full **3×3 area** every time you break a block. Hover over or tap an item to see its name and lore.
