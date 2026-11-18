@@ -3,6 +3,19 @@ title: Stick Recipe
 description: How to craft sticks from planks.
 ---
 
-<img src="/recipes/stick.png" alt="Stick crafting recipe: two oak planks stacked vertically make 4 sticks" width="400" height="182" />
+import CraftingTable from "../../../components/CraftingTable.jsx";
 
-Place **2 planks**, one directly above the other, in a crafting grid to get **4 sticks**. Any type of wood planks works, and the recipe fits in the 2×2 grid in your inventory, so you do not need a crafting table.
+<CraftingTable
+  grid={[
+    null, { id: "oak_planks" }, null,
+    null, { id: "oak_planks" }, null,
+    null, null, null,
+  ]}
+  result={{ id: "stick", count: 4 }}
+  items={{
+    oak_planks: { name: "Oak Planks", lore: "Any wood planks work" },
+    stick: { name: "Stick" },
+  }}
+/>
+
+Place **2 planks**, one directly above the other, in a crafting grid to get **4 sticks**. Any type of wood planks works, and the recipe fits in the 2×2 grid in your inventory, so you do not need a crafting table. Hover over or tap an item to see its name.
