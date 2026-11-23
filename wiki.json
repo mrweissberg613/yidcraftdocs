@@ -41,6 +41,7 @@
         "features/chitas",
         "features/achievements",
         "features/customfoods",
+        "features/custom-items",
         "features/bosses",
         "features/pets"
       ]

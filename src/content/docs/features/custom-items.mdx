@@ -1,0 +1,197 @@
+---
+title: Custom Items and Recipes
+description: Every custom YidCraft item, with its recipe or where to get it. Foods, wine and grapes, kippahs and hats, tools, blocks and furniture.
+---
+
+import Recipe from '../../../components/Recipe.jsx';
+import ItemSlot from '../../../components/ItemSlot.jsx';
+
+Every custom item is on this page. Hover over any slot to see the item's name and description.
+
+Tefillin, tzitzis, the Chai necklace and Shabbos candles have their own page: [Tefillin, Tzitzis and Mivtzoim](/features/mitzvos/).
+
+## Foods
+
+Each custom food counts as kosher prepared food and earns Kosher Points after you join the challenge with `/kosher keep`, so these recipes are worth learning early.
+
+### Rosh Hashana
+These items are **exclusive** to the Rosh Hashana 2026 event. They are not part of the regular recipes above.
+
+<ItemSlot client:load id="apple_honey" title="Exclusive: Rosh Hashana 2026" />
+
+<ItemSlot client:load id="honey_cookie" title="Exclusive: Rosh Hashana 2026" />
+
+### Matzah
+
+<Recipe client:load pattern={["WH"]} keys={{ W: "water_bucket", H: "wheat" }} result="matzah" />
+
+### Challah
+
+<Recipe client:load pattern={[" E ", "EBE", "WWW"]} keys={{ E: "egg", B: "water_bucket", W: "wheat" }} result="challah" />
+
+### Gefilte Fish
+
+<Recipe client:load pattern={["CC"]} keys={{ C: "cooked_cod" }} result="gefilte_fish" />
+
+### Ozen Haman
+
+Makes three, with wheat round a cocoa bean: the dough around a chocolate filling. The bracha is **Mezonos**.
+
+<Recipe client:load pattern={[" W ", "WCW", "WWW"]} keys={{ W: "wheat", C: "cocoa_beans" }} result="ozen_haman" count={3} />
+
+### Pomegranates
+
+Break the leaves of an acacia tree, or let them fall, and now and then a **Rimon** drops. Only a tree's own leaves bear fruit, not leaves someone placed. Before: **Borei pri ha'etz**. After: **Al ha'etz**, because the pomegranate is one of the seven species.
+
+<ItemSlot client:load id="rimon" title="Acacia tree leaves" />
+
+### Grapes
+
+Break vines and sometimes a bunch of **Grapes** drops. Before: **Borei pri ha'etz**. After: **Al ha'etz**, a seven species fruit.
+
+<ItemSlot client:load id="grapes" title="Break vines" />
+
+### Grape Juice
+
+Four bunches of grapes and a glass bottle, in any order. Before: **Borei pri hagafen**. After: **Al hagefen**.
+
+<Recipe client:load ingredients={["grapes", "grapes", "grapes", "grapes", "glass_bottle"]} result="grape_juice" />
+
+### Wine
+
+Put grape juice in a **barrel** and close it. After 20 minutes, open the barrel and the juice has become **Wine**. Same brachos as grape juice: **Borei pri hagafen** and **Al hagefen**.
+
+<ItemSlot client:load id="wine" title="Grape juice, aged 20 min in a barrel" />
+
+### Strawberries
+**Strawberries** can be purchased at spawn! They can be eaten or planted to grow a strawberry bush, just like sweet berries.
+
+<ItemSlot client:load id="strawberry" title="Strawberries" />
+
+The game tells you the right bracha before and after you eat, only in your chat. See [Brachot](/features/brachot/).
+
+
+:::tip
+Custom foods are ready to eat when crafted. They do not need shechita or tevilah.
+:::
+
+## Kippah, Hats, Tichel, Sheitel and Tzitzis
+
+Five head and clothing items: a **Kippah** and a **Black Hat** for men, a **Tichel** and a **Sheitel** for married women, and **Tzitzis** worn with a chestplate or leggings. Head coverings can be worn like helmets, while Tzitzis can be combined with chestplates or leggings.
+
+| Item | On its own | Over a helmet / Armor |
+|---|---|---|
+| Kippah | 1 armor | the helmet's armor **+1** |
+| Tichel | 1 armor | the helmet's armor **+1** |
+| Black Hat | 2 armor | the helmet's armor **+2** |
+| Sheitel | 2 armor | the helmet's armor **+2** |
+| Tzitzis | — | the chestplate or leggings' armor **+1** |
+
+All four need **Mishnah Berurah - Kisui HaRosh**. You find it in village chests (shepherds, tanneries and houses) and in stronghold libraries. Without it the crafting table stays empty and tells you so.
+
+### Kippah
+
+Any wool and a string.
+
+<Recipe client:load pattern={["   ", "WS "]} keys={{ W: "wool", S: "string" }} result="kippah" />
+
+### Tzitzis
+
+Four strings and white wool.
+
+<Recipe client:load pattern={["S S", " W ", "S S"]} keys={{ S: "string", W: "white_wool" }} result="tallis_katan" />
+
+**​Tzitzis on armor:** any chestplate or leggings and a tallis katan.
+
+<Recipe client:load pattern={["   ", "CT "]} keys={{ C: "iron_chestplate", T: "tallis_katan" }} result="tzitzis_chestplate" />
+
+<Recipe client:load pattern={["   ", "CT "]} keys={{ C: "iron_leggings", T: "tallis_katan" }} result="tzitzis_leggings" />
+
+### Tichel
+
+Two wool and a string.
+
+<Recipe client:load pattern={["   ", "WWS"]} keys={{ W: "wool", S: "string" }} result="tichel" />
+
+### Black Hat
+
+Three black wool and a leather.
+
+<Recipe client:load pattern={["   ", "BBB", " L "]} keys={{ B: "black_wool", L: "leather" }} result="black_hat" />
+
+### Sheitel
+
+Two wool, two string and a leather.
+
+<Recipe client:load pattern={["   ", "WW ", "SSL"]} keys={{ W: "wool", S: "string", L: "leather" }} result="sheitel" />
+
+### Dye them
+
+A kippah and a tichel can be any colour. Put one in a crafting table with a dye, just like leather armor. The colour stays when you put it over a helmet.
+
+### Over a helmet
+
+Put any helmet and a head covering together in a crafting table. You get one item that looks like the kippah or hat, with a little trim of the helmet's metal, and is called by both: **Diamond Black Hat**, **Iron Kippah**, **Netherite Tichel**. It keeps everything the helmet had (its protection, enchantments and durability) and adds the head covering's armor on top.
+
+<Recipe client:load pattern={["   ", "HB "]} keys={{ H: "diamond_helmet", B: "black_hat" }} result="diamond_black_hat" />
+
+Leather, chainmail, copper, iron, gold, diamond, netherite and the turtle shell all work.
+
+### Buying them
+
+Reb Mendel's Kosher Shop sells all four:
+
+| Item | Kosher Points |
+|---|---|
+| Kippah | 40 |
+| Tichel | 40 |
+| Black Hat | 250 |
+| Sheitel | 250 |
+
+On Bedrock they look the same on your head, and the helmet versions show their metal trim too.
+
+## Tools
+
+### Shechita Knife
+
+<Recipe client:load pattern={[" I ", " W ", " B "]} keys={{ I: "iron_sword", W: "wheat", B: "bone" }} result="shechita_knife" />
+
+### Drill
+
+Mines three blocks at once, in a line going away from you. Lasts 512 uses.
+
+<Recipe client:load pattern={["iPi", "iRi", " i "]} keys={{ i: "iron_ingot", P: "iron_pickaxe", R: "redstone" }} result="drill" />
+
+### Diamond Drill
+
+Mines a 3x3 area. Lasts 1024 uses. You make it from a Drill.
+
+<Recipe client:load pattern={["dDd", "dRd", " A "]} keys={{ d: "diamond", D: "drill", R: "redstone_block", A: "diamond_block" }} result="drilldiamond" />
+
+## Blocks
+
+### Pebble
+
+One cobblestone makes four pebbles.
+
+<Recipe client:load ingredients={["cobblestone"]} result="pebble" count={4} />
+
+Four pebbles in a square make a cobblestone again.
+
+<Recipe client:load pattern={["AA", "AA"]} keys={{ A: "pebble" }} result="cobblestone" />
+
+### Chessboard Block
+
+Makes four.
+
+<Recipe client:load pattern={["AB", "BA"]} keys={{ A: "white_terracotta", B: "black_terracotta" }} result="chessboard_block" count={4} />
+
+## Furniture
+
+The **Wooden Chair** and the **Bench** are not crafted. Buy them from the carpenter at spawn, then place them on the ground.
+
+<ItemSlot client:load id="wooden_chair" title="Carpenter at spawn" />
+
+<ItemSlot client:load id="bench" title="Carpenter at spawn" />
+
+

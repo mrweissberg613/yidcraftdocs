@@ -32,7 +32,7 @@ function Slot({ item, items, onHover, onLeave }) {
       onMouseMove={(e) => onHover(e, data)}
       onMouseLeave={onLeave}
     >
-      <Icon id={data.texture || item.id} name={data.name} />
+      <Icon id={item.id} name={data.name} />
       {item.count > 1 && <span className="mc-count">{item.count}</span>}
     </div>
   );
@@ -63,10 +63,7 @@ export default function CraftingTable({ grid, result, items = {} }) {
       {tip && (
         <div className="mc-tooltip" style={{ left: tip.x, top: tip.y }}>
           <div className="mc-tip-name">{tip.data.name}</div>
-          {tip.data.lore &&
-            [].concat(tip.data.lore).map((line, i) => (
-              <div key={i} className="mc-tip-lore">{line}</div>
-            ))}
+          {tip.data.lore && <div className="mc-tip-lore">{tip.data.lore}</div>}
         </div>
       )}
     </div>

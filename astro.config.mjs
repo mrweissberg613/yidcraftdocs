@@ -17,9 +17,7 @@ export default defineConfig({
 
 		}
 	},
-	site: 'https://jewishgaming.net',
-  	base: '/yidcraft/wiki',
-
+	site: 'https://yidcraft.vercel.app',
 
 	integrations: [
 		react(),
@@ -133,7 +131,7 @@ export default defineConfig({
 
 						{ label: 'The Tutorial', slug: 'guides/tutorial' },
 
-						{ label: 'The Crafting Guide', slug: 'guides/crafting' }
+						{ label: 'The Crafting', slug: 'guides/crafting' }
 
 
 
@@ -156,9 +154,11 @@ export default defineConfig({
 
 						{ label: 'Teams', slug: 'features/teams' },
 
-						{ label: 'Brewing', slug: 'features/brewing' },
+						{ label: 'Custom Items & Blocks', slug: 'features/custom-items' },
+
+						// Not used anymore { label: 'Brewing', slug: 'features/brewing' },
 						
-						{ label: 'Investing', slug: 'features/investing' },
+						// Not used anymore { label: 'Investing', slug: 'features/investing' },
 
 						{ label: 'Player Shops', slug: 'features/chestshops' },
 
@@ -174,13 +174,13 @@ export default defineConfig({
 
 						{ label: 'Tefillin, Tzitzis and Mivtzoim', slug: 'features/mitzvos' },
 
-						{ label: 'Kippah, Hats, Tichel and Sheitel', slug: 'features/headwear' },
+						// Not used anymore { label: 'Kippah, Hats, Tichel and Sheitel', slug: 'features/headwear' },
 
 						{ label: 'Chitas Pass', slug: 'features/chitas' },
 
 						{ label: 'Trivia and Achievements', slug: 'features/achievements' },
 
-						{ label: 'Custom Foods', slug: 'features/customfoods' },
+						// Not used anymore { label: 'Custom Foods', slug: 'features/customfoods' },
 
 						{ label: 'Boss Hunting', slug: 'features/bosses' },
 

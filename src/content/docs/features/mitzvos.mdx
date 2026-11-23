@@ -3,6 +3,9 @@ title: Tefillin, Tzitzis and Mivtzoim
 description: Put on tefillin and tzitzis every day by typing the brachos, help Jewish villagers with mivtzoim, light the menorah, and learn to make it all yourself.
 ---
 
+import Recipe from '../../../components/Recipe.jsx';
+import ItemSlot from '../../../components/ItemSlot.jsx';
+
 Every mitzvah here earns **Kosher Points**, the same points you earn for keeping kosher. The brachos are said the way you say Modeh Ani: you type the words in chat. Nobody else sees them.
 
 ## Tefillin
@@ -74,21 +77,21 @@ Tefillin have to be kosher all the way through, so the game follows the halacha.
 
 **Klaf**: one kosher hide makes two.
 
-<img src="/recipes/klaf.png" alt="Klaf: one kosher hide makes two" width="460" />
+<Recipe client:load pattern={["   ", " H "]} keys={{ H: "kosher_hide" }} result="klaf" count={2} />
 
 **Parshiyos Shel Yad**: one klaf, an ink sac and a feather.
 
-<img src="/recipes/parshiyos_shel_yad.png" alt="Parshiyos Shel Yad: klaf, ink sac and feather" width="460" />
+<Recipe client:load pattern={["   ", "KIF"]} keys={{ K: "klaf", I: "ink_sac", F: "feather" }} result="parshiyos_shel_yad" />
 
 **Parshiyos Shel Rosh**: four klaf, an ink sac and a feather. The Shel Rosh holds four separate parshiyos.
 
-<img src="/recipes/parshiyos_shel_rosh.png" alt="Parshiyos Shel Rosh: four klaf, ink sac and feather" width="460" />
+<Recipe client:load pattern={["KK ", "KK ", "IF "]} keys={{ K: "klaf", I: "ink_sac", F: "feather" }} result="parshiyos_shel_rosh" />
 
 **Tefillin**: the parshiyos, two kosher hides (the bayis and the retzuah) and black dye. The retzuos must be black.
 
-<img src="/recipes/tefillin_shel_yad.png" alt="Tefillin Shel Yad: parshiyos, two kosher hides and black dye" width="460" />
+<Recipe client:load pattern={["   ", "PHH", " D "]} keys={{ P: "parshiyos_shel_yad", H: "kosher_hide", D: "black_dye" }} result="tefillin_shel_yad" />
 
-<img src="/recipes/tefillin_shel_rosh.png" alt="Tefillin Shel Rosh: parshiyos, two kosher hides and black dye" width="460" />
+<Recipe client:load pattern={["   ", "PHH", " D "]} keys={{ P: "parshiyos_shel_rosh", H: "kosher_hide", D: "black_dye" }} result="tefillin_shel_rosh" />
 
 ### Tzitzis
 
@@ -96,13 +99,13 @@ Needs **Shulchan Aruch - Hilchos Tzitzis**.
 
 **Tallis Katan**: white wool and four strings, one for each corner.
 
-<img src="/recipes/tallis_katan.png" alt="Tallis Katan: white wool and four strings" width="460" />
+<Recipe client:load pattern={["S S", " W ", "S S"]} keys={{ S: "string", W: "white_wool" }} result="tallis_katan" />
 
 **Tzitzis on armor**: any chestplate or leggings and a tallis katan.
 
-<img src="/recipes/tzitzis_chestplate.png" alt="A chestplate and a tallis katan make a chestplate with tzitzis" width="460" />
+<Recipe client:load pattern={["   ", "CT "]} keys={{ C: "iron_chestplate", T: "tallis_katan" }} result="tzitzis_chestplate" />
 
-<img src="/recipes/tzitzis_leggings.png" alt="Leggings and a tallis katan make leggings with tzitzis" width="460" />
+<Recipe client:load pattern={["   ", "CT "]} keys={{ C: "iron_leggings", T: "tallis_katan" }} result="tzitzis_leggings" />
 
 ### The Chai necklace
 
@@ -110,11 +113,11 @@ Needs **Melachas HaTzoref**, the goldsmith's craft.
 
 **Chai Necklace**: two gold nuggets and a string.
 
-<img src="/recipes/chai_necklace.png" alt="Chai Necklace: two gold nuggets and string" width="460" />
+<Recipe client:load pattern={[" S ", "N N"]} keys={{ S: "string", N: "gold_nugget" }} result="chai_necklace" />
 
 **On a chestplate**: any chestplate and a Chai necklace.
 
-<img src="/recipes/chai_chestplate.png" alt="A chestplate and a Chai necklace" width="460" />
+<Recipe client:load pattern={["   ", "CN "]} keys={{ C: "iron_chestplate", N: "chai_necklace" }} result="chai_chestplate" />
 
 ### Shabbos candles and the menorah
 
@@ -122,11 +125,11 @@ No sefer needed.
 
 **Shabbos Candles**: two white candles.
 
-<img src="/recipes/shabbos_candles.png" alt="Shabbos Candles: two white candles" width="460" />
+<Recipe client:load pattern={["   ", "CC "]} keys={{ C: "white_candle" }} result="shabbos_candles" />
 
-**Menorah**: seven gold ingots.
+**Menorah**: exclusive to the Chanukah event, so it has no crafting recipe.
 
-<img src="/recipes/menorah.png" alt="Menorah: seven gold ingots" width="460" />
+<ItemSlot client:load id="menorah" title="Exclusive: Chanukah event" />
 
 ## Prices at Reb Mendel's
 
