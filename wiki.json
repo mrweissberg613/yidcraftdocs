@@ -28,8 +28,6 @@
         "features/town",
         "features/homes",
         "features/teams",
-        "features/brewing",
-        "features/investing",
         "features/chestshops",
         "features/koshersystem",
         "features/skills",
@@ -37,11 +35,9 @@
         "features/tzedakah",
         "features/brachot",
         "features/mitzvos",
-        "features/headwear",
         "features/chitas",
         "features/achievements",
         "features/customfoods",
-        "features/custom-items",
         "features/bosses",
         "features/pets"
       ]

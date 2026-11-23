@@ -3,8 +3,7 @@ title: Tefillin, Tzitzis and Mivtzoim
 description: Put on tefillin and tzitzis every day by typing the brachos, help Jewish villagers with mivtzoim, light the menorah, and learn to make it all yourself.
 ---
 
-import Recipe from '../../../components/Recipe.jsx';
-import ItemSlot from '../../../components/ItemSlot.jsx';
+import CraftingTable from '../../../components/CraftingTable.jsx';
 
 Every mitzvah here earns **Kosher Points**, the same points you earn for keeping kosher. The brachos are said the way you say Modeh Ani: you type the words in chat. Nobody else sees them.
 
@@ -77,21 +76,156 @@ Tefillin have to be kosher all the way through, so the game follows the halacha.
 
 **Klaf**: one kosher hide makes two.
 
-<Recipe client:load pattern={["   ", " H "]} keys={{ H: "kosher_hide" }} result="klaf" count={2} />
+<CraftingTable
+  client:load
+  grid={[
+    null, null,                  null,
+    null, { id: "kosher_hide" }, null,
+    null, null,                  null,
+  ]}
+  result={{ id: "klaf", count: 2 }}
+  items={{
+    kosher_hide: {
+      name: "Kosher Hide",
+      lore: [
+        "The hide of a kosher animal.",
+        "Klaf and batim are made from it.",
+      ],
+    },
+    klaf: {
+      name: "Klaf",
+      lore: [
+        "Parchment from a kosher hide,",
+        "ready for a sofer.",
+      ],
+    },
+  }}
+/>
 
 **Parshiyos Shel Yad**: one klaf, an ink sac and a feather.
 
-<Recipe client:load pattern={["   ", "KIF"]} keys={{ K: "klaf", I: "ink_sac", F: "feather" }} result="parshiyos_shel_yad" />
+<CraftingTable
+  client:load
+  grid={[
+    null,           null,              null,
+    { id: "klaf" }, { id: "ink_sac" }, { id: "feather" },
+    null,           null,              null,
+  ]}
+  result={{ id: "parshiyos_shel_yad" }}
+  items={{
+    klaf: {
+      name: "Klaf",
+      lore: [
+        "Parchment from a kosher hide,",
+        "ready for a sofer.",
+      ],
+    },
+    ink_sac: { name: "Ink Sac" },
+    feather: { name: "Feather" },
+    parshiyos_shel_yad: {
+      name: "Parshiyos for the Shel Yad",
+      lore: [
+        "The four parshiyos, written by a sofer",
+        "on one klaf.",
+      ],
+    },
+  }}
+/>
 
 **Parshiyos Shel Rosh**: four klaf, an ink sac and a feather. The Shel Rosh holds four separate parshiyos.
 
-<Recipe client:load pattern={["KK ", "KK ", "IF "]} keys={{ K: "klaf", I: "ink_sac", F: "feather" }} result="parshiyos_shel_rosh" />
+<CraftingTable
+  client:load
+  grid={[
+    { id: "klaf" },    { id: "klaf" },    null,
+    { id: "klaf" },    { id: "klaf" },    null,
+    { id: "ink_sac" }, { id: "feather" }, null,
+  ]}
+  result={{ id: "parshiyos_shel_rosh" }}
+  items={{
+    klaf: {
+      name: "Klaf",
+      lore: [
+        "Parchment from a kosher hide,",
+        "ready for a sofer.",
+      ],
+    },
+    ink_sac: { name: "Ink Sac" },
+    feather: { name: "Feather" },
+    parshiyos_shel_rosh: {
+      name: "Parshiyos for the Shel Rosh",
+      lore: [
+        "The four parshiyos, written by a sofer,",
+        "each on its own klaf.",
+      ],
+    },
+  }}
+/>
 
 **Tefillin**: the parshiyos, two kosher hides (the bayis and the retzuah) and black dye. The retzuos must be black.
 
-<Recipe client:load pattern={["   ", "PHH", " D "]} keys={{ P: "parshiyos_shel_yad", H: "kosher_hide", D: "black_dye" }} result="tefillin_shel_yad" />
+<CraftingTable
+  client:load
+  grid={[
+    null,                         null,                  null,
+    { id: "parshiyos_shel_yad" }, { id: "kosher_hide" }, { id: "kosher_hide" },
+    null,                         { id: "black_dye" },   null,
+  ]}
+  result={{ id: "tefillin_shel_yad" }}
+  items={{
+    parshiyos_shel_yad: {
+      name: "Parshiyos for the Shel Yad",
+      lore: [
+        "The four parshiyos, written by a sofer",
+        "on one klaf.",
+      ],
+    },
+    kosher_hide: {
+      name: "Kosher Hide",
+      lore: [
+        "The hide of a kosher animal.",
+        "Klaf and batim are made from it.",
+      ],
+    },
+    black_dye: { name: "Black Dye" },
+    tefillin_shel_yad: {
+      name: "Tefillin Shel Yad",
+      lore: [
+        "Right click by day, with the Shel Rosh",
+        "with you, to put on tefillin.",
+        "Not on Shabbos or Yom Tov.",
+      ],
+    },
+  }}
+/>
 
-<Recipe client:load pattern={["   ", "PHH", " D "]} keys={{ P: "parshiyos_shel_rosh", H: "kosher_hide", D: "black_dye" }} result="tefillin_shel_rosh" />
+<CraftingTable
+  client:load
+  grid={[
+    null,                          null,                  null,
+    { id: "parshiyos_shel_rosh" }, { id: "kosher_hide" }, { id: "kosher_hide" },
+    null,                          { id: "black_dye" },   null,
+  ]}
+  result={{ id: "tefillin_shel_rosh" }}
+  items={{
+    parshiyos_shel_rosh: {
+      name: "Parshiyos for the Shel Rosh",
+      lore: [
+        "The four parshiyos, written by a sofer,",
+        "each on its own klaf.",
+      ],
+    },
+    kosher_hide: {
+      name: "Kosher Hide",
+      lore: [
+        "The hide of a kosher animal.",
+        "Klaf and batim are made from it.",
+      ],
+    },
+    black_dye: { name: "Black Dye" },
+    tefillin_shel_rosh: { name: "Tefillin Shel Rosh", lore: ["Goes on after the Shel Yad."] },
+  }}
+/>
 
 ### Tzitzis
 
@@ -99,13 +233,79 @@ Needs **Shulchan Aruch - Hilchos Tzitzis**.
 
 **Tallis Katan**: white wool and four strings, one for each corner.
 
-<Recipe client:load pattern={["S S", " W ", "S S"]} keys={{ S: "string", W: "white_wool" }} result="tallis_katan" />
+<CraftingTable
+  client:load
+  grid={[
+    { id: "string" }, null,                 { id: "string" },
+    null,             { id: "white_wool" }, null,
+    { id: "string" }, null,                 { id: "string" },
+  ]}
+  result={{ id: "tallis_katan" }}
+  items={{
+    string: { name: "String" },
+    white_wool: { name: "White Wool" },
+    tallis_katan: {
+      name: "Tallis Katan",
+      lore: [
+        "Tzitzis on its four corners.",
+        "Wear it in the leggings slot, or tie it",
+        "onto a chestplate or leggings at a",
+        "crafting table. By day, the bracha.",
+        "+1 Armor while worn.",
+      ],
+    },
+  }}
+/>
 
 **Tzitzis on armor**: any chestplate or leggings and a tallis katan.
 
-<Recipe client:load pattern={["   ", "CT "]} keys={{ C: "iron_chestplate", T: "tallis_katan" }} result="tzitzis_chestplate" />
+<CraftingTable
+  client:load
+  grid={[
+    null,                      null,                   null,
+    { id: "iron_chestplate" }, { id: "tallis_katan" }, null,
+    null,                      null,                   null,
+  ]}
+  result={{ id: "tzitzis_chestplate" }}
+  items={{
+    iron_chestplate: { name: "Any Chestplate", lore: ["Any chestplate works"] },
+    tallis_katan: {
+      name: "Tallis Katan",
+      lore: [
+        "Tzitzis on its four corners.",
+        "Wear it in the leggings slot, or tie it",
+        "onto a chestplate or leggings at a",
+        "crafting table. By day, the bracha.",
+        "+1 Armor while worn.",
+      ],
+    },
+    tzitzis_chestplate: { name: "Chestplate with Tzitzis" },
+  }}
+/>
 
-<Recipe client:load pattern={["   ", "CT "]} keys={{ C: "iron_leggings", T: "tallis_katan" }} result="tzitzis_leggings" />
+<CraftingTable
+  client:load
+  grid={[
+    null,                    null,                   null,
+    { id: "iron_leggings" }, { id: "tallis_katan" }, null,
+    null,                    null,                   null,
+  ]}
+  result={{ id: "tzitzis_leggings" }}
+  items={{
+    iron_leggings: { name: "Any Leggings", lore: ["Any leggings work"] },
+    tallis_katan: {
+      name: "Tallis Katan",
+      lore: [
+        "Tzitzis on its four corners.",
+        "Wear it in the leggings slot, or tie it",
+        "onto a chestplate or leggings at a",
+        "crafting table. By day, the bracha.",
+        "+1 Armor while worn.",
+      ],
+    },
+    tzitzis_leggings: { name: "Leggings with Tzitzis" },
+  }}
+/>
 
 ### The Chai necklace
 
@@ -113,11 +313,53 @@ Needs **Melachas HaTzoref**, the goldsmith's craft.
 
 **Chai Necklace**: two gold nuggets and a string.
 
-<Recipe client:load pattern={[" S ", "N N"]} keys={{ S: "string", N: "gold_nugget" }} result="chai_necklace" />
+<CraftingTable
+  client:load
+  grid={[
+    null,                  { id: "string" }, null,
+    { id: "gold_nugget" }, null,             { id: "gold_nugget" },
+    null,                  null,             null,
+  ]}
+  result={{ id: "chai_necklace" }}
+  items={{
+    string: { name: "String" },
+    gold_nugget: { name: "Gold Nugget" },
+    chai_necklace: {
+      name: "Chai Necklace",
+      lore: [
+        "A small gold Chai on a thin chain.",
+        "Wear it in the leggings slot, or tie it",
+        "onto a chestplate at a crafting table.",
+        "+1 Armor while worn.",
+      ],
+    },
+  }}
+/>
 
 **On a chestplate**: any chestplate and a Chai necklace.
 
-<Recipe client:load pattern={["   ", "CN "]} keys={{ C: "iron_chestplate", N: "chai_necklace" }} result="chai_chestplate" />
+<CraftingTable
+  client:load
+  grid={[
+    null,                      null,                    null,
+    { id: "iron_chestplate" }, { id: "chai_necklace" }, null,
+    null,                      null,                    null,
+  ]}
+  result={{ id: "chai_chestplate" }}
+  items={{
+    iron_chestplate: { name: "Any Chestplate", lore: ["Any chestplate works"] },
+    chai_necklace: {
+      name: "Chai Necklace",
+      lore: [
+        "A small gold Chai on a thin chain.",
+        "Wear it in the leggings slot, or tie it",
+        "onto a chestplate at a crafting table.",
+        "+1 Armor while worn.",
+      ],
+    },
+    chai_chestplate: { name: "Chestplate with Chai Necklace" },
+  }}
+/>
 
 ### Shabbos candles and the menorah
 
@@ -125,11 +367,43 @@ No sefer needed.
 
 **Shabbos Candles**: two white candles.
 
-<Recipe client:load pattern={["   ", "CC "]} keys={{ C: "white_candle" }} result="shabbos_candles" />
+<CraftingTable
+  client:load
+  grid={[
+    null,                   null,                   null,
+    { id: "white_candle" }, { id: "white_candle" }, null,
+    null,                   null,                   null,
+  ]}
+  result={{ id: "shabbos_candles" }}
+  items={{
+    white_candle: { name: "White Candle" },
+    shabbos_candles: {
+      name: "Shabbos Candles",
+      lore: [
+        "A pair of candles for Shabbos.",
+        "Give them to someone who will light them.",
+      ],
+    },
+  }}
+/>
 
 **Menorah**: exclusive to the Chanukah event, so it has no crafting recipe.
 
-<ItemSlot client:load id="menorah" title="Exclusive: Chanukah event" />
+<CraftingTable
+  client:load
+  title="Exclusive: Chanukah event"
+  result={{ id: "menorah" }}
+  items={{
+    menorah: {
+      name: "Chanukah Menorah",
+      lore: [
+        "On the nights of Chanukah, after dark,",
+        "right click the top of a block to light it.",
+        "One more light each night, added from the right.",
+      ],
+    },
+  }}
+/>
 
 ## Prices at Reb Mendel's
 
