@@ -156,10 +156,6 @@ export default defineConfig({
 
 						{ label: 'Custom Items & Blocks', slug: 'features/custom-items' },
 
-						// Not used anymore { label: 'Brewing', slug: 'features/brewing' },
-						
-						// Not used anymore { label: 'Investing', slug: 'features/investing' },
-
 						{ label: 'Player Shops', slug: 'features/chestshops' },
 
 						{ label: 'Kosher System', slug: 'features/koshersystem' },
@@ -174,13 +170,9 @@ export default defineConfig({
 
 						{ label: 'Tefillin, Tzitzis and Mivtzoim', slug: 'features/mitzvos' },
 
-						// Not used anymore { label: 'Kippah, Hats, Tichel and Sheitel', slug: 'features/headwear' },
-
 						{ label: 'Chitas Pass', slug: 'features/chitas' },
 
 						{ label: 'Trivia and Achievements', slug: 'features/achievements' },
-
-						// Not used anymore { label: 'Custom Foods', slug: 'features/customfoods' },
 
 						{ label: 'Boss Hunting', slug: 'features/bosses' },
 
