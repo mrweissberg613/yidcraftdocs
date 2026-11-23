@@ -2,7 +2,8 @@
 title: Kosher System
 description: Keep kosher on YidCraft with shechita, tevilah, Bishul, and Kosher Points.
 ---
-
+import Recipe from '../../../components/Recipe.jsx';
+import ItemSlot from '../../../components/ItemSlot.jsx';
 import { Steps } from '@astrojs/starlight/components'
 
 Run `/kosher keep` to join the Kosher Challenge. From then on, kosher food earns **Kosher Points**, properly prepared meat pays the most, and forbidden food costs you points, health, and a chance.
@@ -147,7 +148,7 @@ You can remove a mikveh you built. You cannot remove anyone else's, including th
 
 **Bishul** is a special enchantment for the Shechita Knife. Combine a Bishul book with the knife in an anvil. The anvil costs XP levels.
 
-<img src="/assets/bishul-knife.png" alt="A Shechita Knife showing the Bishul enchantment and Toiveled status" width="576" />
+<Recipe client:load pattern={[" I ", " W ", " B "]} keys={{ I: "iron_sword", W: "wheat", B: "bone" }} result="shechita_knife" />
 
 A knife with Bishul drops meat already cooked. The kosher marking carries over, so the result is the same as slaughtering the animal and then smelting the raw meat. You can eat the drop right away and earn the normal cooked-meat points.
 
