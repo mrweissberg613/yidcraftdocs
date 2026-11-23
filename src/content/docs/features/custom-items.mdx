@@ -3,8 +3,7 @@ title: Custom Items and Recipes
 description: Every custom YidCraft item, with its recipe or where to get it. Foods, wine and grapes, kippahs and hats, tools, blocks and furniture.
 ---
 
-import Recipe from '../../../components/Recipe.jsx';
-import ItemSlot from '../../../components/ItemSlot.jsx';
+import CraftingTable from "../../../components/CraftingTable.jsx";
 
 Every custom item is on this page. Hover over any slot to see the item's name and description.
 
@@ -17,56 +16,199 @@ Each custom food counts as kosher prepared food and earns Kosher Points after yo
 ### Rosh Hashana
 These items are **exclusive** to the Rosh Hashana 2026 event. They are not part of the regular recipes above.
 
-<ItemSlot client:load id="apple_honey" title="Exclusive: Rosh Hashana 2026" />
+<CraftingTable
+  client:load
+  title="Exclusive: Rosh Hashana 2026"
+  result={{ id: "apple_honey" }}
+  items={{
+    apple_honey: { name: "Apple & Honey", lore: ["A nice sweet apple for a nice sweet new year"] },
+  }}
+/>
 
-<ItemSlot client:load id="honey_cookie" title="Exclusive: Rosh Hashana 2026" />
+<CraftingTable
+  client:load
+  title="Exclusive: Rosh Hashana 2026"
+  result={{ id: "honey_cookie" }}
+  items={{
+    honey_cookie: { name: "Honey Cookie", lore: ["A nice sweet Cookie for a nice sweet new year"] },
+  }}
+/>
 
 ### Matzah
 
-<Recipe client:load pattern={["WH"]} keys={{ W: "water_bucket", H: "wheat" }} result="matzah" />
+<CraftingTable
+  client:load
+  grid={[
+    { id: "water_bucket" }, { id: "wheat" }, null,
+    null,                   null,            null,
+    null,                   null,            null,
+  ]}
+  result={{ id: "matzah" }}
+  items={{
+    water_bucket: { name: "Water Bucket" },
+    wheat: { name: "Wheat" },
+    matzah: { name: "Matzah", lore: ["Nice stale Matzah"] },
+  }}
+/>
 
 ### Challah
 
-<Recipe client:load pattern={[" E ", "EBE", "WWW"]} keys={{ E: "egg", B: "water_bucket", W: "wheat" }} result="challah" />
+<CraftingTable
+  client:load
+  grid={[
+    null,            { id: "egg" },          null,
+    { id: "egg" },   { id: "water_bucket" }, { id: "egg" },
+    { id: "wheat" }, { id: "wheat" },        { id: "wheat" },
+  ]}
+  result={{ id: "challah" }}
+  items={{
+    egg: { name: "Egg" },
+    water_bucket: { name: "Water Bucket" },
+    wheat: { name: "Wheat" },
+    challah: { name: "Challah", lore: ["Freshly made Challah like Bubbie made it"] },
+  }}
+/>
 
 ### Gefilte Fish
 
-<Recipe client:load pattern={["CC"]} keys={{ C: "cooked_cod" }} result="gefilte_fish" />
+<CraftingTable
+  client:load
+  grid={[
+    { id: "cooked_cod" }, { id: "cooked_cod" }, null,
+    null,                 null,                 null,
+    null,                 null,                 null,
+  ]}
+  result={{ id: "gefilte_fish" }}
+  items={{
+    cooked_cod: { name: "Cooked Cod" },
+    gefilte_fish: { name: "Gefilte Fish", lore: ["Hand-prepared traditional gefilte fish"] },
+  }}
+/>
 
 ### Ozen Haman
 
 Makes three, with wheat round a cocoa bean: the dough around a chocolate filling. The bracha is **Mezonos**.
 
-<Recipe client:load pattern={[" W ", "WCW", "WWW"]} keys={{ W: "wheat", C: "cocoa_beans" }} result="ozen_haman" count={3} />
+<CraftingTable
+  client:load
+  grid={[
+    null,            { id: "wheat" },       null,
+    { id: "wheat" }, { id: "cocoa_beans" }, { id: "wheat" },
+    { id: "wheat" }, { id: "wheat" },       { id: "wheat" },
+  ]}
+  result={{ id: "ozen_haman", count: 3 }}
+  items={{
+    wheat: { name: "Wheat" },
+    cocoa_beans: { name: "Cocoa Beans" },
+    ozen_haman: {
+      name: "Ozen Haman",
+      lore: [
+        "A three cornered pastry for Purim,",
+        "filled with chocolate.",
+      ],
+    },
+  }}
+/>
 
 ### Pomegranates
 
 Break the leaves of an acacia tree, or let them fall, and now and then a **Rimon** drops. Only a tree's own leaves bear fruit, not leaves someone placed. Before: **Borei pri ha'etz**. After: **Al ha'etz**, because the pomegranate is one of the seven species.
 
-<ItemSlot client:load id="rimon" title="Acacia tree leaves" />
+<CraftingTable
+  client:load
+  title="Acacia tree leaves"
+  result={{ id: "rimon" }}
+  items={{
+    rimon: {
+      name: "Rimon",
+      lore: [
+        "A pomegranate, one of the seven species.",
+        "Acacia trees in the savanna bear them.",
+      ],
+    },
+  }}
+/>
 
 ### Grapes
 
 Break vines and sometimes a bunch of **Grapes** drops. Before: **Borei pri ha'etz**. After: **Al ha'etz**, a seven species fruit.
 
-<ItemSlot client:load id="grapes" title="Break vines" />
+<CraftingTable
+  client:load
+  title="Break vines"
+  result={{ id: "grapes" }}
+  items={{
+    grapes: {
+      name: "Grapes",
+      lore: [
+        "One of the seven species.",
+        "Found growing on vines.",
+      ],
+    },
+  }}
+/>
 
 ### Grape Juice
 
 Four bunches of grapes and a glass bottle, in any order. Before: **Borei pri hagafen**. After: **Al hagefen**.
 
-<Recipe client:load ingredients={["grapes", "grapes", "grapes", "grapes", "glass_bottle"]} result="grape_juice" />
+<CraftingTable
+  client:load
+  grid={[
+    { id: "grapes" }, { id: "grapes" },       { id: "grapes" },
+    { id: "grapes" }, { id: "glass_bottle" }, null,
+    null,             null,                   null,
+  ]}
+  result={{ id: "grape_juice" }}
+  items={{
+    grapes: {
+      name: "Grapes",
+      lore: [
+        "One of the seven species.",
+        "Found growing on vines.",
+      ],
+    },
+    glass_bottle: { name: "Glass Bottle" },
+    grape_juice: {
+      name: "Grape Juice",
+      lore: [
+        "For kiddush and havdalah.",
+        "Leave it in a barrel a while and it becomes wine.",
+      ],
+    },
+  }}
+/>
 
 ### Wine
 
 Put grape juice in a **barrel** and close it. After 20 minutes, open the barrel and the juice has become **Wine**. Same brachos as grape juice: **Borei pri hagafen** and **Al hagefen**.
 
-<ItemSlot client:load id="wine" title="Grape juice, aged 20 min in a barrel" />
+<CraftingTable
+  client:load
+  title="Grape juice, aged 20 min in a barrel"
+  result={{ id: "wine" }}
+  items={{
+    wine: {
+      name: "Wine", texture: "grape_juice",
+      lore: [
+        "For kiddush and havdalah.",
+        "Aged in a barrel.",
+      ],
+    },
+  }}
+/>
 
 ### Strawberries
 **Strawberries** can be purchased at spawn! They can be eaten or planted to grow a strawberry bush, just like sweet berries.
 
-<ItemSlot client:load id="strawberry" title="Strawberries" />
+<CraftingTable
+  client:load
+  title="Strawberries"
+  result={{ id: "strawberry" }}
+  items={{
+    strawberry: { name: "Strawberry", lore: ["A sweet and juicy fruit, perfect for a refreshing snack."] },
+  }}
+/>
 
 The game tells you the right bracha before and after you eat, only in your chat. See [Brachot](/features/brachot/).
 
@@ -93,37 +235,184 @@ All four need **Mishnah Berurah - Kisui HaRosh**. You find it in village chests 
 
 Any wool and a string.
 
-<Recipe client:load pattern={["   ", "WS "]} keys={{ W: "wool", S: "string" }} result="kippah" />
+<CraftingTable
+  client:load
+  grid={[
+    null,           null,             null,
+    { id: "wool" }, { id: "string" }, null,
+    null,           null,             null,
+  ]}
+  result={{ id: "kippah" }}
+  items={{
+    wool: { name: "Any Wool", lore: ["Any colour works"] },
+    string: { name: "String" },
+    kippah: {
+      name: "Kippah",
+      lore: [
+        "Wear it on your head. Dye it any colour,",
+        "or wear it over a helmet: put both",
+        "in a crafting table. +1 Armor",
+      ],
+    },
+  }}
+/>
 
 ### Tzitzis
 
 Four strings and white wool.
 
-<Recipe client:load pattern={["S S", " W ", "S S"]} keys={{ S: "string", W: "white_wool" }} result="tallis_katan" />
+<CraftingTable
+  client:load
+  grid={[
+    { id: "string" }, null,                 { id: "string" },
+    null,             { id: "white_wool" }, null,
+    { id: "string" }, null,                 { id: "string" },
+  ]}
+  result={{ id: "tallis_katan" }}
+  items={{
+    string: { name: "String" },
+    white_wool: { name: "White Wool" },
+    tallis_katan: {
+      name: "Tallis Katan",
+      lore: [
+        "Tzitzis on its four corners.",
+        "Wear it in the leggings slot, or tie it",
+        "onto a chestplate or leggings at a",
+        "crafting table. By day, the bracha.",
+        "+1 Armor while worn.",
+      ],
+    },
+  }}
+/>
 
 **​Tzitzis on armor:** any chestplate or leggings and a tallis katan.
 
-<Recipe client:load pattern={["   ", "CT "]} keys={{ C: "iron_chestplate", T: "tallis_katan" }} result="tzitzis_chestplate" />
+<CraftingTable
+  client:load
+  grid={[
+    null,                      null,                   null,
+    { id: "iron_chestplate" }, { id: "tallis_katan" }, null,
+    null,                      null,                   null,
+  ]}
+  result={{ id: "tzitzis_chestplate" }}
+  items={{
+    iron_chestplate: { name: "Any Chestplate", lore: ["Any chestplate works"] },
+    tallis_katan: {
+      name: "Tallis Katan",
+      lore: [
+        "Tzitzis on its four corners.",
+        "Wear it in the leggings slot, or tie it",
+        "onto a chestplate or leggings at a",
+        "crafting table. By day, the bracha.",
+        "+1 Armor while worn.",
+      ],
+    },
+    tzitzis_chestplate: { name: "Chestplate with Tzitzis" },
+  }}
+/>
 
-<Recipe client:load pattern={["   ", "CT "]} keys={{ C: "iron_leggings", T: "tallis_katan" }} result="tzitzis_leggings" />
+<CraftingTable
+  client:load
+  grid={[
+    null,                    null,                   null,
+    { id: "iron_leggings" }, { id: "tallis_katan" }, null,
+    null,                    null,                   null,
+  ]}
+  result={{ id: "tzitzis_leggings" }}
+  items={{
+    iron_leggings: { name: "Any Leggings", lore: ["Any leggings work"] },
+    tallis_katan: {
+      name: "Tallis Katan",
+      lore: [
+        "Tzitzis on its four corners.",
+        "Wear it in the leggings slot, or tie it",
+        "onto a chestplate or leggings at a",
+        "crafting table. By day, the bracha.",
+        "+1 Armor while worn.",
+      ],
+    },
+    tzitzis_leggings: { name: "Leggings with Tzitzis" },
+  }}
+/>
 
 ### Tichel
 
 Two wool and a string.
 
-<Recipe client:load pattern={["   ", "WWS"]} keys={{ W: "wool", S: "string" }} result="tichel" />
+<CraftingTable
+  client:load
+  grid={[
+    null,           null,           null,
+    { id: "wool" }, { id: "wool" }, { id: "string" },
+    null,           null,           null,
+  ]}
+  result={{ id: "tichel" }}
+  items={{
+    wool: { name: "Any Wool", lore: ["Any colour works"] },
+    string: { name: "String" },
+    tichel: {
+      name: "Tichel",
+      lore: [
+        "A headscarf. Dye it any colour,",
+        "or wear it over a helmet: put both",
+        "in a crafting table. +1 Armor",
+      ],
+    },
+  }}
+/>
 
 ### Black Hat
 
 Three black wool and a leather.
 
-<Recipe client:load pattern={["   ", "BBB", " L "]} keys={{ B: "black_wool", L: "leather" }} result="black_hat" />
+<CraftingTable
+  client:load
+  grid={[
+    null,                 null,                 null,
+    { id: "black_wool" }, { id: "black_wool" }, { id: "black_wool" },
+    null,                 { id: "leather" },    null,
+  ]}
+  result={{ id: "black_hat" }}
+  items={{
+    black_wool: { name: "Black Wool" },
+    leather: { name: "Leather" },
+    black_hat: {
+      name: "Black Hat",
+      lore: [
+        "A black felt hat. Wear it over a",
+        "helmet too: put both in a crafting",
+        "table. +2 Armor",
+      ],
+    },
+  }}
+/>
 
 ### Sheitel
 
 Two wool, two string and a leather.
 
-<Recipe client:load pattern={["   ", "WW ", "SSL"]} keys={{ W: "wool", S: "string", L: "leather" }} result="sheitel" />
+<CraftingTable
+  client:load
+  grid={[
+    null,             null,             null,
+    { id: "wool" },   { id: "wool" },   null,
+    { id: "string" }, { id: "string" }, { id: "leather" },
+  ]}
+  result={{ id: "sheitel" }}
+  items={{
+    wool: { name: "Any Wool", lore: ["Any colour works"] },
+    string: { name: "String" },
+    leather: { name: "Leather" },
+    sheitel: {
+      name: "Sheitel",
+      lore: [
+        "A wig, for a married woman. Dye it",
+        "any colour, or wear it over a helmet:",
+        "put both in a crafting table. +2 Armor",
+      ],
+    },
+  }}
+/>
 
 ### Dye them
 
@@ -133,7 +422,33 @@ A kippah and a tichel can be any colour. Put one in a crafting table with a dye,
 
 Put any helmet and a head covering together in a crafting table. You get one item that looks like the kippah or hat, with a little trim of the helmet's metal, and is called by both: **Diamond Black Hat**, **Iron Kippah**, **Netherite Tichel**. It keeps everything the helmet had (its protection, enchantments and durability) and adds the head covering's armor on top.
 
-<Recipe client:load pattern={["   ", "HB "]} keys={{ H: "diamond_helmet", B: "black_hat" }} result="diamond_black_hat" />
+<CraftingTable
+  client:load
+  grid={[
+    null,                     null,                null,
+    { id: "diamond_helmet" }, { id: "black_hat" }, null,
+    null,                     null,                null,
+  ]}
+  result={{ id: "diamond_black_hat" }}
+  items={{
+    diamond_helmet: { name: "Any Helmet", lore: ["Any helmet works"] },
+    black_hat: {
+      name: "Black Hat",
+      lore: [
+        "A black felt hat. Wear it over a",
+        "helmet too: put both in a crafting",
+        "table. +2 Armor",
+      ],
+    },
+    diamond_black_hat: {
+      name: "Diamond Black Hat",
+      lore: [
+        "Keeps everything the helmet had",
+        "and adds the hat's armor on top.",
+      ],
+    },
+  }}
+/>
 
 Leather, chainmail, copper, iron, gold, diamond, netherite and the turtle shell all work.
 
@@ -154,19 +469,80 @@ On Bedrock they look the same on your head, and the helmet versions show their m
 
 ### Shechita Knife
 
-<Recipe client:load pattern={[" I ", " W ", " B "]} keys={{ I: "iron_sword", W: "wheat", B: "bone" }} result="shechita_knife" />
+<CraftingTable
+  client:load
+  grid={[
+    null, { id: "iron_sword" }, null,
+    null, { id: "wheat" },      null,
+    null, { id: "bone" },       null,
+  ]}
+  result={{ id: "shechita_knife" }}
+  items={{
+    iron_sword: { name: "Iron Sword" },
+    wheat: { name: "Wheat" },
+    bone: { name: "Bone" },
+    shechita_knife: { name: "Shechita Knife", lore: ["Used for kosher slaughter"] },
+  }}
+/>
 
 ### Drill
 
 Mines three blocks at once, in a line going away from you. Lasts 512 uses.
 
-<Recipe client:load pattern={["iPi", "iRi", " i "]} keys={{ i: "iron_ingot", P: "iron_pickaxe", R: "redstone" }} result="drill" />
+<CraftingTable
+  client:load
+  grid={[
+    { id: "iron_ingot" }, { id: "iron_pickaxe" }, { id: "iron_ingot" },
+    { id: "iron_ingot" }, { id: "redstone" },     { id: "iron_ingot" },
+    null,                 { id: "iron_ingot" },   null,
+  ]}
+  result={{ id: "drill" }}
+  items={{
+    iron_ingot: { name: "Iron Ingot" },
+    iron_pickaxe: { name: "Iron Pickaxe" },
+    redstone: { name: "Redstone Dust" },
+    drill: {
+      name: "Drill",
+      lore: [
+        "⛏ Ability",
+        "Mines 3 blocks at once.",
+      ],
+    },
+  }}
+/>
 
 ### Diamond Drill
 
 Mines a 3x3 area. Lasts 1024 uses. You make it from a Drill.
 
-<Recipe client:load pattern={["dDd", "dRd", " A "]} keys={{ d: "diamond", D: "drill", R: "redstone_block", A: "diamond_block" }} result="drilldiamond" />
+<CraftingTable
+  client:load
+  grid={[
+    { id: "diamond" }, { id: "drill" },          { id: "diamond" },
+    { id: "diamond" }, { id: "redstone_block" }, { id: "diamond" },
+    null,              { id: "diamond_block" },  null,
+  ]}
+  result={{ id: "drilldiamond" }}
+  items={{
+    diamond: { name: "Diamond" },
+    drill: {
+      name: "Drill",
+      lore: [
+        "⛏ Ability",
+        "Mines 3 blocks at once.",
+      ],
+    },
+    redstone_block: { name: "Block of Redstone" },
+    diamond_block: { name: "Block of Diamond" },
+    drilldiamond: {
+      name: "Diamond Drill", texture: "drill",
+      lore: [
+        "⛏ Ability",
+        "Mines a 3x3 area.",
+      ],
+    },
+  }}
+/>
 
 ## Blocks
 
@@ -174,24 +550,73 @@ Mines a 3x3 area. Lasts 1024 uses. You make it from a Drill.
 
 One cobblestone makes four pebbles.
 
-<Recipe client:load ingredients={["cobblestone"]} result="pebble" count={4} />
+<CraftingTable
+  client:load
+  grid={[
+    { id: "cobblestone" }, null, null,
+    null,                  null, null,
+    null,                  null, null,
+  ]}
+  result={{ id: "pebble", count: 4 }}
+  items={{
+    cobblestone: { name: "Cobblestone" },
+    pebble: { name: "Pebble" },
+  }}
+/>
 
 Four pebbles in a square make a cobblestone again.
 
-<Recipe client:load pattern={["AA", "AA"]} keys={{ A: "pebble" }} result="cobblestone" />
+<CraftingTable
+  client:load
+  grid={[
+    { id: "pebble" }, { id: "pebble" }, null,
+    { id: "pebble" }, { id: "pebble" }, null,
+    null,             null,             null,
+  ]}
+  result={{ id: "cobblestone" }}
+  items={{
+    pebble: { name: "Pebble" },
+    cobblestone: { name: "Cobblestone" },
+  }}
+/>
 
 ### Chessboard Block
 
 Makes four.
 
-<Recipe client:load pattern={["AB", "BA"]} keys={{ A: "white_terracotta", B: "black_terracotta" }} result="chessboard_block" count={4} />
+<CraftingTable
+  client:load
+  grid={[
+    { id: "white_terracotta" }, { id: "black_terracotta" }, null,
+    { id: "black_terracotta" }, { id: "white_terracotta" }, null,
+    null,                       null,                       null,
+  ]}
+  result={{ id: "chessboard_block", count: 4 }}
+  items={{
+    white_terracotta: { name: "White Terracotta" },
+    black_terracotta: { name: "Black Terracotta" },
+    chessboard_block: { name: "Chessboard Block" },
+  }}
+/>
 
 ## Furniture
 
 The **Wooden Chair** and the **Bench** are not crafted. Buy them from the carpenter at spawn, then place them on the ground.
 
-<ItemSlot client:load id="wooden_chair" title="Carpenter at spawn" />
+<CraftingTable
+  client:load
+  title="Carpenter at spawn"
+  result={{ id: "wooden_chair" }}
+  items={{
+    wooden_chair: { name: "Wooden Chair" },
+  }}
+/>
 
-<ItemSlot client:load id="bench" title="Carpenter at spawn" />
-
-
+<CraftingTable
+  client:load
+  title="Carpenter at spawn"
+  result={{ id: "bench" }}
+  items={{
+    bench: { name: "Bench" },
+  }}
+/>
