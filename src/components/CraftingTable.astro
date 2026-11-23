@@ -1,0 +1,7 @@
+---
+// Hydrates the React CraftingTable so MDX pages don't need client:load.
+import CraftingTableReact from "./CraftingTable.jsx";
+const props = Astro.props;
+---
+
+<CraftingTableReact client:load {...props} />
