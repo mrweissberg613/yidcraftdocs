@@ -3,7 +3,7 @@ title: Custom Items and Recipes
 description: Every custom YidCraft item, with its recipe or where to get it. Foods, wine and grapes, kippahs and hats, tools, blocks and furniture.
 ---
 
-import CraftingTable from "../../../components/CraftingTable.jsx";
+import CraftingTable from '../../../components/CraftingTable.jsx';
 
 Every custom item is on this page. Hover over any slot to see the item's name and description.
 
@@ -17,7 +17,6 @@ Each custom food counts as kosher prepared food and earns Kosher Points after yo
 These items are **exclusive** to the Rosh Hashana 2026 event. They are not part of the regular recipes above.
 
 <CraftingTable
-  client:load
   title="Exclusive: Rosh Hashana 2026"
   result={{ id: "apple_honey" }}
   items={{
@@ -26,7 +25,6 @@ These items are **exclusive** to the Rosh Hashana 2026 event. They are not part 
 />
 
 <CraftingTable
-  client:load
   title="Exclusive: Rosh Hashana 2026"
   result={{ id: "honey_cookie" }}
   items={{
@@ -37,7 +35,6 @@ These items are **exclusive** to the Rosh Hashana 2026 event. They are not part 
 ### Matzah
 
 <CraftingTable
-  client:load
   grid={[
     { id: "water_bucket" }, { id: "wheat" }, null,
     null,                   null,            null,
@@ -54,7 +51,6 @@ These items are **exclusive** to the Rosh Hashana 2026 event. They are not part 
 ### Challah
 
 <CraftingTable
-  client:load
   grid={[
     null,            { id: "egg" },          null,
     { id: "egg" },   { id: "water_bucket" }, { id: "egg" },
@@ -72,7 +68,6 @@ These items are **exclusive** to the Rosh Hashana 2026 event. They are not part 
 ### Gefilte Fish
 
 <CraftingTable
-  client:load
   grid={[
     { id: "cooked_cod" }, { id: "cooked_cod" }, null,
     null,                 null,                 null,
@@ -90,7 +85,6 @@ These items are **exclusive** to the Rosh Hashana 2026 event. They are not part 
 Makes three, with wheat round a cocoa bean: the dough around a chocolate filling. The bracha is **Mezonos**.
 
 <CraftingTable
-  client:load
   grid={[
     null,            { id: "wheat" },       null,
     { id: "wheat" }, { id: "cocoa_beans" }, { id: "wheat" },
@@ -115,7 +109,6 @@ Makes three, with wheat round a cocoa bean: the dough around a chocolate filling
 Break the leaves of an acacia tree, or let them fall, and now and then a **Rimon** drops. Only a tree's own leaves bear fruit, not leaves someone placed. Before: **Borei pri ha'etz**. After: **Al ha'etz**, because the pomegranate is one of the seven species.
 
 <CraftingTable
-  client:load
   title="Acacia tree leaves"
   result={{ id: "rimon" }}
   items={{
@@ -134,7 +127,6 @@ Break the leaves of an acacia tree, or let them fall, and now and then a **Rimon
 Break vines and sometimes a bunch of **Grapes** drops. Before: **Borei pri ha'etz**. After: **Al ha'etz**, a seven species fruit.
 
 <CraftingTable
-  client:load
   title="Break vines"
   result={{ id: "grapes" }}
   items={{
@@ -153,7 +145,6 @@ Break vines and sometimes a bunch of **Grapes** drops. Before: **Borei pri ha'et
 Four bunches of grapes and a glass bottle, in any order. Before: **Borei pri hagafen**. After: **Al hagefen**.
 
 <CraftingTable
-  client:load
   grid={[
     { id: "grapes" }, { id: "grapes" },       { id: "grapes" },
     { id: "grapes" }, { id: "glass_bottle" }, null,
@@ -184,7 +175,6 @@ Four bunches of grapes and a glass bottle, in any order. Before: **Borei pri hag
 Put grape juice in a **barrel** and close it. After 20 minutes, open the barrel and the juice has become **Wine**. Same brachos as grape juice: **Borei pri hagafen** and **Al hagefen**.
 
 <CraftingTable
-  client:load
   title="Grape juice, aged 20 min in a barrel"
   result={{ id: "wine" }}
   items={{
@@ -202,7 +192,6 @@ Put grape juice in a **barrel** and close it. After 20 minutes, open the barrel 
 **Strawberries** can be purchased at spawn! They can be eaten or planted to grow a strawberry bush, just like sweet berries.
 
 <CraftingTable
-  client:load
   title="Strawberries"
   result={{ id: "strawberry" }}
   items={{
@@ -236,7 +225,6 @@ All four need **Mishnah Berurah - Kisui HaRosh**. You find it in village chests 
 Any wool and a string.
 
 <CraftingTable
-  client:load
   grid={[
     null,           null,             null,
     { id: "wool" }, { id: "string" }, null,
@@ -262,7 +250,6 @@ Any wool and a string.
 Four strings and white wool.
 
 <CraftingTable
-  client:load
   grid={[
     { id: "string" }, null,                 { id: "string" },
     null,             { id: "white_wool" }, null,
@@ -288,7 +275,6 @@ Four strings and white wool.
 **​Tzitzis on armor:** any chestplate or leggings and a tallis katan.
 
 <CraftingTable
-  client:load
   grid={[
     null,                      null,                   null,
     { id: "iron_chestplate" }, { id: "tallis_katan" }, null,
@@ -312,7 +298,6 @@ Four strings and white wool.
 />
 
 <CraftingTable
-  client:load
   grid={[
     null,                    null,                   null,
     { id: "iron_leggings" }, { id: "tallis_katan" }, null,
@@ -340,7 +325,6 @@ Four strings and white wool.
 Two wool and a string.
 
 <CraftingTable
-  client:load
   grid={[
     null,           null,           null,
     { id: "wool" }, { id: "wool" }, { id: "string" },
@@ -366,7 +350,6 @@ Two wool and a string.
 Three black wool and a leather.
 
 <CraftingTable
-  client:load
   grid={[
     null,                 null,                 null,
     { id: "black_wool" }, { id: "black_wool" }, { id: "black_wool" },
@@ -392,7 +375,6 @@ Three black wool and a leather.
 Two wool, two string and a leather.
 
 <CraftingTable
-  client:load
   grid={[
     null,             null,             null,
     { id: "wool" },   { id: "wool" },   null,
@@ -423,7 +405,6 @@ A kippah and a tichel can be any colour. Put one in a crafting table with a dye,
 Put any helmet and a head covering together in a crafting table. You get one item that looks like the kippah or hat, with a little trim of the helmet's metal, and is called by both: **Diamond Black Hat**, **Iron Kippah**, **Netherite Tichel**. It keeps everything the helmet had (its protection, enchantments and durability) and adds the head covering's armor on top.
 
 <CraftingTable
-  client:load
   grid={[
     null,                     null,                null,
     { id: "diamond_helmet" }, { id: "black_hat" }, null,
@@ -470,7 +451,6 @@ On Bedrock they look the same on your head, and the helmet versions show their m
 ### Shechita Knife
 
 <CraftingTable
-  client:load
   grid={[
     null, { id: "iron_sword" }, null,
     null, { id: "wheat" },      null,
@@ -490,7 +470,6 @@ On Bedrock they look the same on your head, and the helmet versions show their m
 Mines three blocks at once, in a line going away from you. Lasts 512 uses.
 
 <CraftingTable
-  client:load
   grid={[
     { id: "iron_ingot" }, { id: "iron_pickaxe" }, { id: "iron_ingot" },
     { id: "iron_ingot" }, { id: "redstone" },     { id: "iron_ingot" },
@@ -516,7 +495,6 @@ Mines three blocks at once, in a line going away from you. Lasts 512 uses.
 Mines a 3x3 area. Lasts 1024 uses. You make it from a Drill.
 
 <CraftingTable
-  client:load
   grid={[
     { id: "diamond" }, { id: "drill" },          { id: "diamond" },
     { id: "diamond" }, { id: "redstone_block" }, { id: "diamond" },
@@ -551,7 +529,6 @@ Mines a 3x3 area. Lasts 1024 uses. You make it from a Drill.
 One cobblestone makes four pebbles.
 
 <CraftingTable
-  client:load
   grid={[
     { id: "cobblestone" }, null, null,
     null,                  null, null,
@@ -567,7 +544,6 @@ One cobblestone makes four pebbles.
 Four pebbles in a square make a cobblestone again.
 
 <CraftingTable
-  client:load
   grid={[
     { id: "pebble" }, { id: "pebble" }, null,
     { id: "pebble" }, { id: "pebble" }, null,
@@ -585,7 +561,6 @@ Four pebbles in a square make a cobblestone again.
 Makes four.
 
 <CraftingTable
-  client:load
   grid={[
     { id: "white_terracotta" }, { id: "black_terracotta" }, null,
     { id: "black_terracotta" }, { id: "white_terracotta" }, null,
@@ -604,7 +579,6 @@ Makes four.
 The **Wooden Chair** and the **Bench** are not crafted. Buy them from the carpenter at spawn, then place them on the ground.
 
 <CraftingTable
-  client:load
   title="Carpenter at spawn"
   result={{ id: "wooden_chair" }}
   items={{
@@ -613,7 +587,6 @@ The **Wooden Chair** and the **Bench** are not crafted. Buy them from the carpen
 />
 
 <CraftingTable
-  client:load
   title="Carpenter at spawn"
   result={{ id: "bench" }}
   items={{
